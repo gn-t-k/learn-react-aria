@@ -1,4 +1,6 @@
+import { tokensProvider } from "../src/tokens.css";
 import type { Preview } from "@storybook/react";
+// import "modern-normalize";
 
 const preview: Preview = {
   parameters: {
@@ -9,6 +11,13 @@ const preview: Preview = {
       },
     },
   },
+  decorators: [
+    (Story) => (
+      <div className={tokensProvider}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export default preview;
