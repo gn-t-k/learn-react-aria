@@ -1,10 +1,9 @@
 import { FC, PropsWithChildren } from "react";
-import { wrapper } from "./button.css";
-import { Button as ButtonPrimitive, ButtonProps } from "react-aria-components";
-import { ButtonVariants } from "./button.css";
+import * as styles from "./button.css";
+import { Button as AriaButton, ButtonProps } from "react-aria-components";
 import clsx from "clsx";
 
-type Props = ButtonProps & ButtonVariants;
+type Props = ButtonProps & styles.ButtonVariants;
 export const Button: FC<PropsWithChildren<Props>> = ({
   className,
   variant,
@@ -12,8 +11,8 @@ export const Button: FC<PropsWithChildren<Props>> = ({
   ...props
 }) => {
   return (
-    <ButtonPrimitive
-      className={clsx([className, wrapper({ variant, size })])}
+    <AriaButton
+      className={clsx([className, styles.button({ variant, size })])}
       {...props}
     />
   );

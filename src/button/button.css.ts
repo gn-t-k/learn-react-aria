@@ -1,7 +1,7 @@
 import { recipe, RecipeVariants } from "@vanilla-extract/recipes";
-import { tokens } from "../tokens.css";
+import { tokens } from "../styles/tokens.css";
 
-export const wrapper = recipe({
+export const button = recipe({
   base: {
     border: 0,
     backgroundColor: `hsl(${tokens.color.background})`,
@@ -109,4 +109,4 @@ export const wrapper = recipe({
   },
 });
 
-export type ButtonVariants = RecipeVariants<typeof wrapper>;
+export type ButtonVariants = RecipeVariants<typeof button>;

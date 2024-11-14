@@ -66,6 +66,7 @@ export const [tokensProvider, tokens] = createTheme({
     "accent-foreground": "240, 5.9%, 10%",
     secondary: "240, 4.8%, 95.9%",
     "secondary-foreground": "240, 5.9%, 10%",
+    border: "217.2, 32.6%, 17.5%",
   },
   spacing: {
     "1": "0.25rem",
@@ -87,5 +88,12 @@ export const [tokensProvider, tokens] = createTheme({
     "28": "7rem",
     "32": "8rem",
     "36": "9rem",
+  },
+  breakpoint: {
+    sm: "640px",
+    md: "768px",
+    lg: "1024px",
+    xl: "1280px",
+    "2xl": "1536px",
   },
 });

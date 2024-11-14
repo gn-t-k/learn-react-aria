@@ -1,4 +1,4 @@
-import { tokensProvider } from "../src/tokens.css";
+import { tokensProvider } from "../src/styles/tokens.css";
 import type { Preview } from "@storybook/react";
 // import "modern-normalize";
 
