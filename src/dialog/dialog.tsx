@@ -27,7 +27,9 @@ export const DialogOverlay: FC<AriaModalOverlayProps> = ({
   return (
     <AriaModalOverlay
       isDismissable={isDismissable}
-      className={clsx([className, styles.dialogOverlay])}
+      className={composeRenderProps(className, (className) =>
+        clsx([styles.dialogOverlay, className])
+      )}
       {...props}
     />
   );
@@ -45,5 +47,26 @@ export const DialogContent: FC<DialogContentProps> = ({
   closeButton = true,
   ...props
 }) => {
-  return <AriaModal />;
+  return (
+    <AriaModal
+      className={composeRenderProps(className, (className) =>
+        clsx([className, styles.dialogContent])
+      )}
+      {...props}
+    >
+      <AriaDialog role={role}>
+        {composeRenderProps(children, (children, renderProps) => (
+          <>
+            {children}
+            {closeButton && (
+              <AriaButton onPress={renderProps.close} className={}>
+                <X className={} />
+                <span className={}>Close</span>
+              </AriaButton>
+            )}
+          </>
+        ))}
+      </AriaDialog>
+    </AriaModal>
+  );
 };

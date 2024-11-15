@@ -1,18 +1,13 @@
-import { recipe, RecipeVariants } from "@vanilla-extract/recipes";
 import { tokens } from "../styles/tokens.css";
-import { animateIn, animateOut } from "../styles/rules/animate.css";
 import {
-  slideInFromBottom,
   slideInFromLeft,
-  slideInFromRight,
   slideInFromTop,
-  slideOutToBottom,
   slideOutToLeft,
-  slideOutToRight,
   slideOutToTop,
 } from "../styles/rules/slide.css";
 import { fadeIn, fadeOut } from "../styles/rules/fade.css";
 import { style } from "@vanilla-extract/css";
+import { zoomIn, zoomOut } from "../styles/rules/zoom.css";
 
 export const dialogOverlay = style({
   position: "fixed",
@@ -21,28 +16,55 @@ export const dialogOverlay = style({
   backgroundColor: "rgba(0, 0, 0, 0.8)",
   selectors: {
     '&[data-entering="true"]': {
-      ...animateIn("0.5s"),
-      ...fadeIn("0%"),
+      ...fadeIn(),
     },
     '&[data-exiting="true"]': {
-      ...animateOut("0.3s"),
-      ...fadeOut("0%"),
+      ...fadeOut(),
     },
   },
 });
 
 export const dialogContent = style({
+  position: "fixed",
+  left: "50vw",
+  top: "50vh",
   zIndex: 50,
-  gap: tokens.spacing[4],
+  width: "100%",
+  maxWidth: tokens.maxWidth.lg,
+  transform: "translate(-50%, -50%)",
+  border: `1px solid hsl(${tokens.color.border})`,
   backgroundColor: `hsl(${tokens.color.background})`,
-  boxShadow: "0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1)",
-  transition: "all 0.2s ease-in-out",
-  selectors: {
-    "&[data-entering='true']": {
-      ...animateIn("0.5s"),
+  padding: tokens.spacing[6],
+  boxShadow: tokens.boxShadow.lg,
+  gap: tokens.spacing[4],
+  "@media": {
+    [`(min-width: ${tokens.breakpoint.sm})`]: {
+      borderRadius: tokens.borderRadius.lg,
     },
-    "&[data-exiting='true']": {
-      ...animateOut("0.3s"),
+    [`(min-width: ${tokens.breakpoint.md})`]: {
+      width: "100%",
     },
   },
+  selectors: {
+    "&[data-entering='true']": {
+      ...fadeIn(),
+      ...zoomIn(),
+      ...slideInFromLeft({ enterTranslateX: "50%" }),
+      ...slideInFromTop({ enterTranslateY: "48%" }),
+    },
+    "&[data-exiting='true']": {
+      ...fadeOut(),
+      ...zoomOut(),
+      ...slideOutToLeft({ exitTranslateX: "50%" }),
+      ...slideOutToTop({ exitTranslateY: "48%" }),
+    },
+  },
+});
+
+export const dialogCloseButton = style({
+  position: "absolute",
+  right: tokens.spacing[4],
+  top: tokens.spacing[4],
+  borderRadius: tokens.borderRadius.sm,
+  opacity: 0.7,
 });

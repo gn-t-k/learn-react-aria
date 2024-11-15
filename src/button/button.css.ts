@@ -9,8 +9,8 @@ export const button = recipe({
     alignItems: "center",
     justifyContent: "center",
     whiteSpace: "nowrap",
-    borderRadius: tokens.borderRadius.default,
-    fontSize: tokens.fontSize.sm,
+    borderRadius: tokens.borderRadius.sm,
+    ...tokens.composite.text.sm,
     fontWeight: tokens.fontWeight.medium,
     transition: "color 0.2s, background-color 0.2s",
     position: "relative",
@@ -21,7 +21,7 @@ export const button = recipe({
       },
       "&:focus-visible": {
         outline: "none",
-        boxShadow: `0 0 0 2px hsl(${tokens.color.ring}), 0 0 0 4px hsl(${tokens.color["ring-offset"]})`,
+        boxShadow: `0 0 0 2px hsl(${tokens.color.ring}), 0 0 0 4px hsl(${tokens.color["ringOffset"]})`,
       },
     },
   },
@@ -29,7 +29,7 @@ export const button = recipe({
     variant: {
       default: {
         backgroundColor: `hsl(${tokens.color.primary})`,
-        color: `hsl(${tokens.color["primary-foreground"]})`,
+        color: `hsl(${tokens.color["primaryForeground"]})`,
         selectors: {
           "&[data-hovered='true']": {
             backgroundColor: `hsla(${tokens.color.primary}, 0.9)`,
@@ -38,7 +38,7 @@ export const button = recipe({
       },
       destructive: {
         backgroundColor: `hsl(${tokens.color.destructive})`,
-        color: `hsl(${tokens.color["destructive-foreground"]})`,
+        color: `hsl(${tokens.color["destructiveForeground"]})`,
         selectors: {
           "&[data-hovered='true']": {
             backgroundColor: `hsla(${tokens.color.destructive}, 0.9)`,
@@ -51,13 +51,13 @@ export const button = recipe({
         selectors: {
           "&[data-hovered='true']": {
             backgroundColor: `hsl(${tokens.color.accent})`,
-            color: `hsl(${tokens.color["accent-foreground"]})`,
+            color: `hsl(${tokens.color["accentForeground"]})`,
           },
         },
       },
       secondary: {
         backgroundColor: `hsl(${tokens.color.secondary})`,
-        color: `hsl(${tokens.color["secondary-foreground"]})`,
+        color: `hsl(${tokens.color["secondaryForeground"]})`,
         selectors: {
           "&[data-hovered='true']": {
             backgroundColor: `hsla(${tokens.color.secondary}, 0.8)`,
@@ -68,7 +68,7 @@ export const button = recipe({
         selectors: {
           "&[data-hovered='true']": {
             backgroundColor: `hsl(${tokens.color.accent})`,
-            color: `hsl(${tokens.color["accent-foreground"]})`,
+            color: `hsl(${tokens.color["accentForeground"]})`,
           },
         },
       },

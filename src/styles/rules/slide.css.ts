@@ -5,59 +5,150 @@ import {
   exitTranslateX,
   exitTranslateY,
 } from "../vars.css";
+import deepmerge from "deepmerge";
+import { enterBase } from "./enter-base.css";
+import { exitBase } from "./exit-base.css";
 
-type SlideInFromTop = (lengthPercentage: string) => StyleRule;
-export const slideInFromTop: SlideInFromTop = (lengthPercentage) => ({
-  vars: {
-    [enterTranslateY]: `-${lengthPercentage}`,
-  },
-});
+type SlideInFromTop = (
+  props?:
+    | {
+        duration?: string | undefined;
+        enterTranslateY?: string | undefined;
+      }
+    | undefined
+) => StyleRule;
+export const slideInFromTop: SlideInFromTop = (props) =>
+  deepmerge.all<StyleRule>([
+    enterBase(),
+    {
+      vars: {
+        [enterTranslateY]: `-${props?.enterTranslateY ?? "100%"}`,
+      },
+    },
+  ]);
 
-type SlideInFromBottom = (lengthPercentage: string) => StyleRule;
-export const slideInFromBottom: SlideInFromBottom = (lengthPercentage) => ({
-  vars: {
-    [enterTranslateY]: lengthPercentage,
-  },
-});
+type SlideInFromBottom = (
+  props?:
+    | {
+        duration?: string | undefined;
+        enterTranslateY?: string | undefined;
+      }
+    | undefined
+) => StyleRule;
+export const slideInFromBottom: SlideInFromBottom = (props) =>
+  deepmerge.all<StyleRule>([
+    enterBase(),
+    {
+      vars: {
+        [enterTranslateY]: props?.enterTranslateY ?? "100%",
+      },
+    },
+  ]);
 
-type SlideInFromLeft = (lengthPercentage: string) => StyleRule;
-export const slideInFromLeft: SlideInFromLeft = (lengthPercentage) => ({
-  vars: {
-    [enterTranslateX]: `-${lengthPercentage}`,
-  },
-});
+type SlideInFromLeft = (
+  props?:
+    | {
+        duration?: string | undefined;
+        enterTranslateX?: string | undefined;
+      }
+    | undefined
+) => StyleRule;
+export const slideInFromLeft: SlideInFromLeft = (props) =>
+  deepmerge.all<StyleRule>([
+    enterBase(),
+    {
+      vars: {
+        [enterTranslateX]: `-${props?.enterTranslateX ?? "100%"}`,
+      },
+    },
+  ]);
 
-type SlideInFromRight = (lengthPercentage: string) => StyleRule;
-export const slideInFromRight: SlideInFromRight = (lengthPercentage) => ({
-  vars: {
-    [enterTranslateX]: lengthPercentage,
-  },
-});
+type SlideInFromRight = (
+  props?:
+    | {
+        duration?: string | undefined;
+        enterTranslateX?: string | undefined;
+      }
+    | undefined
+) => StyleRule;
+export const slideInFromRight: SlideInFromRight = (props) =>
+  deepmerge.all<StyleRule>([
+    enterBase(),
+    {
+      vars: {
+        [enterTranslateX]: props?.enterTranslateX ?? "100%",
+      },
+    },
+  ]);
 
-type SlideOutToTop = (lengthPercentage: string) => StyleRule;
-export const slideOutToTop: SlideOutToTop = (lengthPercentage) => ({
-  vars: {
-    [exitTranslateY]: `-${lengthPercentage}`,
-  },
-});
+type SlideOutToTop = (
+  props?:
+    | {
+        duration?: string | undefined;
+        exitTranslateY?: string | undefined;
+      }
+    | undefined
+) => StyleRule;
+export const slideOutToTop: SlideOutToTop = (props) =>
+  deepmerge.all<StyleRule>([
+    exitBase(),
+    {
+      vars: {
+        [exitTranslateY]: `-${props?.exitTranslateY ?? "100%"}`,
+      },
+    },
+  ]);
 
-type SlideOutToBottom = (lengthPercentage: string) => StyleRule;
-export const slideOutToBottom: SlideOutToBottom = (lengthPercentage) => ({
-  vars: {
-    [exitTranslateY]: lengthPercentage,
-  },
-});
+type SlideOutToBottom = (
+  props?:
+    | {
+        duration?: string | undefined;
+        exitTranslateY?: string | undefined;
+      }
+    | undefined
+) => StyleRule;
+export const slideOutToBottom: SlideOutToBottom = (props) =>
+  deepmerge.all<StyleRule>([
+    exitBase(),
+    {
+      vars: {
+        [exitTranslateY]: props?.exitTranslateY ?? "100%",
+      },
+    },
+  ]);
 
-type SlideOutToLeft = (lengthPercentage: string) => StyleRule;
-export const slideOutToLeft: SlideOutToLeft = (lengthPercentage) => ({
-  vars: {
-    [exitTranslateX]: `-${lengthPercentage}`,
-  },
-});
+type SlideOutToLeft = (
+  props?:
+    | {
+        duration?: string | undefined;
+        exitTranslateX?: string | undefined;
+      }
+    | undefined
+) => StyleRule;
+export const slideOutToLeft: SlideOutToLeft = (props) =>
+  deepmerge.all<StyleRule>([
+    exitBase(),
+    {
+      vars: {
+        [exitTranslateX]: `-${props?.exitTranslateX ?? "100%"}`,
+      },
+    },
+  ]);
 
-type SlideOutToRight = (lengthPercentage: string) => StyleRule;
-export const slideOutToRight: SlideOutToRight = (lengthPercentage) => ({
-  vars: {
-    [exitTranslateX]: lengthPercentage,
-  },
-});
+type SlideOutToRight = (
+  props?:
+    | {
+        duration?: string | undefined;
+        exitTranslateX?: string | undefined;
+      }
+    | undefined
+) => StyleRule;
+export const slideOutToRight: SlideOutToRight = (props) =>
+  deepmerge.all<StyleRule>([
+    exitBase(),
+    {
+      vars: {
+        [exitTranslateX]: props?.exitTranslateX ?? "100%",
+      },
+    },
+  ]);
