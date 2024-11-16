@@ -29,6 +29,7 @@ export const [tokensProvider, tokens] = createTheme({
   },
   spacing: {
     "1": "0.25rem",
+    "1.5": "0.375rem",
     "2": "0.5rem",
     "3": "0.75rem",
     "4": "1rem",
@@ -65,6 +66,24 @@ export const [tokensProvider, tokens] = createTheme({
     bold: "700",
     "extra-bold": "800",
     black: "900",
+  },
+  letterSpacing: {
+    tighter: "-0.05em",
+    tight: "-0.025em",
+    normal: "0em",
+    wide: "0.025em",
+    wider: "0.05em",
+    widest: "0.1em",
+  },
+  lineHeight: {
+    "3": "0.75rem",
+    "4": "1rem",
+    "5": "1.25rem",
+    "6": "1.5rem",
+    "7": "1.75rem",
+    "8": "2rem",
+    "9": "2.25rem",
+    "10": "2.5rem",
   },
   borderRadius: {
     xs: "0.125rem",
@@ -207,6 +226,12 @@ export const [tokensProvider, tokens] = createTheme({
         animationName: bounce,
         animationDuration: "1s",
         animationIterationCount: "infinite",
+      },
+    },
+    size: {
+      icon: {
+        width: "1rem",
+        height: "1rem",
       },
     },
   },

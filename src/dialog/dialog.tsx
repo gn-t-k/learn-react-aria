@@ -13,6 +13,7 @@ import {
   ModalOverlayProps as AriaModalOverlayProps,
   composeRenderProps,
 } from "react-aria-components";
+import { VisuallyHidden } from "react-aria";
 import * as styles from "./dialog.css";
 
 export const Dialog = AriaDialog;
@@ -50,18 +51,21 @@ export const DialogContent: FC<DialogContentProps> = ({
   return (
     <AriaModal
       className={composeRenderProps(className, (className) =>
-        clsx([className, styles.dialogContent])
+        clsx([styles.dialogContentModal, className])
       )}
       {...props}
     >
-      <AriaDialog role={role}>
+      <AriaDialog role={role} className={styles.dialogContent}>
         {composeRenderProps(children, (children, renderProps) => (
           <>
             {children}
             {closeButton && (
-              <AriaButton onPress={renderProps.close} className={}>
-                <X className={} />
-                <span className={}>Close</span>
+              <AriaButton
+                onPress={renderProps.close}
+                className={styles.dialogCloseButton}
+              >
+                <X className={styles.dialogCloseButtonIcon} />
+                <VisuallyHidden>Close</VisuallyHidden>
               </AriaButton>
             )}
           </>
@@ -70,3 +74,34 @@ export const DialogContent: FC<DialogContentProps> = ({
     </AriaModal>
   );
 };
+
+export const DialogHeader: FC<ComponentProps<"header">> = ({
+  className,
+  ...props
+}) => {
+  return (
+    <header className={clsx([styles.dialogHeader, className])} {...props} />
+  );
+};
+
+export const DialogFooter: FC<ComponentProps<"footer">> = ({
+  className,
+  ...props
+}) => {
+  return (
+    <footer className={clsx([styles.dialogFooter, className])} {...props} />
+  );
+};
+
+export const DialogTitle: FC<AriaHeadingProps> = ({ className, ...props }) => (
+  <AriaHeading
+    slot="title"
+    className={clsx([styles.dialogTitle, className])}
+    {...props}
+  />
+);
+
+export const DialogDescription: FC<ComponentProps<"p">> = ({
+  className,
+  ...props
+}) => <p className={clsx([styles.dialogDescription, className])} {...props} />;

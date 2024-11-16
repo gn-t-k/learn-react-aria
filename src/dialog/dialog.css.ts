@@ -25,6 +25,13 @@ export const dialogOverlay = style({
 });
 
 export const dialogContent = style({
+  display: "grid",
+  height: "100%",
+  gap: tokens.spacing[4],
+  outline: "none",
+});
+
+export const dialogContentModal = style({
   position: "fixed",
   left: "50vw",
   top: "50vh",
@@ -38,10 +45,10 @@ export const dialogContent = style({
   boxShadow: tokens.boxShadow.lg,
   gap: tokens.spacing[4],
   "@media": {
-    [`(min-width: ${tokens.breakpoint.sm})`]: {
+    [`(min-width: 40rem)`]: {
       borderRadius: tokens.borderRadius.lg,
     },
-    [`(min-width: ${tokens.breakpoint.md})`]: {
+    [`(min-width: 48rem)`]: {
       width: "100%",
     },
   },
@@ -67,4 +74,66 @@ export const dialogCloseButton = style({
   top: tokens.spacing[4],
   borderRadius: tokens.borderRadius.sm,
   opacity: 0.7,
+  transition: "opacity 0.2s",
+  selectors: {
+    ['&[data-disabled="true"]']: {
+      pointerEvents: "none",
+    },
+    ['&[data-entering="true"]']: {
+      backgroundColor: `hsl(${tokens.color.accent})`,
+      color: `hsl(${tokens.color.mutedForeground})`,
+    },
+    ['&[data-hovered="true"]']: {
+      opacity: 1,
+    },
+    ['&[data-focused="true"]']: {
+      outline: "none",
+      boxShadow: `0 0 0 2px ${tokens.color.ring}, 0 0 0 calc(1px + 2px) transparent`,
+    },
+  },
+});
+
+export const dialogCloseButtonIcon = style({
+  ...tokens.composite.size.icon,
+});
+
+export const dialogHeader = style({
+  display: "flex",
+  flexDirection: "column",
+  gap: tokens.spacing["1.5"],
+  textAlign: "center",
+  "@media": {
+    [`(min-width: 40rem)`]: {
+      textAlign: "left",
+    },
+  },
+});
+
+export const dialogFooter = style({
+  display: "flex",
+  flexDirection: "column-reverse",
+  "@media": {
+    [`(min-width: 40rem)`]: {
+      flexDirection: "row",
+      justifyContent: "flex-end",
+      gap: tokens.spacing[2],
+    },
+  },
+});
+
+export const dialogTitle = style({
+  ...tokens.composite.text.lg,
+  fontWeight: tokens.fontWeight.semibold,
+});
+
+export const dialogDescription = style({
+  display: "flex",
+  flexDirection: "column",
+  gap: tokens.spacing["1.5"],
+  textAlign: "center",
+  "@media": {
+    [`(min-width: 40rem)`]: {
+      textAlign: "left",
+    },
+  },
 });
