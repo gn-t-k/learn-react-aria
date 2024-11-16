@@ -19,7 +19,7 @@ type SlideInFromTop = (
 ) => StyleRule;
 export const slideInFromTop: SlideInFromTop = (props) =>
   deepmerge.all<StyleRule>([
-    enterBase(),
+    enterBase(props?.duration),
     {
       vars: {
         [enterTranslateY]: `-${props?.enterTranslateY ?? "100%"}`,
@@ -37,7 +37,7 @@ type SlideInFromBottom = (
 ) => StyleRule;
 export const slideInFromBottom: SlideInFromBottom = (props) =>
   deepmerge.all<StyleRule>([
-    enterBase(),
+    enterBase(props?.duration),
     {
       vars: {
         [enterTranslateY]: props?.enterTranslateY ?? "100%",
@@ -55,7 +55,7 @@ type SlideInFromLeft = (
 ) => StyleRule;
 export const slideInFromLeft: SlideInFromLeft = (props) =>
   deepmerge.all<StyleRule>([
-    enterBase(),
+    enterBase(props?.duration),
     {
       vars: {
         [enterTranslateX]: `-${props?.enterTranslateX ?? "100%"}`,
@@ -73,7 +73,7 @@ type SlideInFromRight = (
 ) => StyleRule;
 export const slideInFromRight: SlideInFromRight = (props) =>
   deepmerge.all<StyleRule>([
-    enterBase(),
+    enterBase(props?.duration),
     {
       vars: {
         [enterTranslateX]: props?.enterTranslateX ?? "100%",

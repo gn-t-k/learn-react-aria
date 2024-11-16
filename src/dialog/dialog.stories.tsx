@@ -9,7 +9,6 @@ import {
   DialogTrigger,
 } from "./dialog";
 import { Button } from "../button/button";
-import { tokensProvider } from "../styles/tokens.css";
 
 const meta: Meta<typeof DialogTrigger> = {
   component: DialogTrigger,
@@ -22,7 +21,7 @@ export const Default: Story = {
   render: () => (
     <DialogTrigger>
       <Button>open</Button>
-      <DialogOverlay className={tokensProvider}>
+      <DialogOverlay>
         <DialogContent>
           {({ close }) => (
             <>

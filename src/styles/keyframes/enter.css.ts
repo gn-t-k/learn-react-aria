@@ -12,7 +12,7 @@ export const enter = keyframes({
     opacity: fallbackVar(enterOpacity, "1"),
     transform: `
       translate3d(
-        ${fallbackVar(enterTranslateX, "1")},
+        ${fallbackVar(enterTranslateX, "0")},
         ${fallbackVar(enterTranslateY, "0")},
         0
       )

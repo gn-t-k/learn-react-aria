@@ -6,8 +6,9 @@ import {
   slideOutToTop,
 } from "../styles/rules/slide.css";
 import { fadeIn, fadeOut } from "../styles/rules/fade.css";
-import { style } from "@vanilla-extract/css";
+import { style, StyleRule } from "@vanilla-extract/css";
 import { zoomIn, zoomOut } from "../styles/rules/zoom.css";
+import deepmerge from "deepmerge";
 
 export const dialogOverlay = style({
   position: "fixed",
@@ -53,18 +54,18 @@ export const dialogContentModal = style({
     },
   },
   selectors: {
-    "&[data-entering='true']": {
-      ...fadeIn(),
-      ...zoomIn(),
-      ...slideInFromLeft({ enterTranslateX: "50%" }),
-      ...slideInFromTop({ enterTranslateY: "48%" }),
-    },
-    "&[data-exiting='true']": {
-      ...fadeOut(),
-      ...zoomOut(),
-      ...slideOutToLeft({ exitTranslateX: "50%" }),
-      ...slideOutToTop({ exitTranslateY: "48%" }),
-    },
+    "&[data-entering='true']": deepmerge.all<StyleRule>([
+      fadeIn(),
+      zoomIn(),
+      slideInFromLeft({ enterTranslateX: "50%" }),
+      slideInFromTop({ enterTranslateY: "48%" }),
+    ]),
+    "&[data-exiting='true']": deepmerge.all<StyleRule>([
+      fadeOut(),
+      zoomOut(),
+      slideOutToLeft({ exitTranslateX: "50%" }),
+      slideOutToTop({ exitTranslateY: "48%" }),
+    ]),
   },
 });
 

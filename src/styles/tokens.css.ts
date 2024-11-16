@@ -1,10 +1,10 @@
-import { createTheme } from "@vanilla-extract/css";
+import { createGlobalTheme } from "@vanilla-extract/css";
 import { spin } from "./keyframes/spin.css";
 import { ping } from "./keyframes/ping.css";
 import { pulse } from "./keyframes/pulse.css";
 import { bounce } from "./keyframes/bounce.css";
 
-export const [tokensProvider, tokens] = createTheme({
+export const tokens = createGlobalTheme(":root", {
   color: {
     background: "0, 0%, 100%",
     foreground: "222.2, 84%, 4.9%",
