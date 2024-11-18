@@ -1,3 +1,5 @@
+import "./preflight.css";
+
 import { createGlobalTheme } from "@vanilla-extract/css";
 import { spin } from "./keyframes/spin.css";
 import { ping } from "./keyframes/ping.css";
@@ -24,7 +26,7 @@ export const tokens = createGlobalTheme(":root", {
     destructiveForeground: "210, 40%, 98%",
     border: "214.3, 31.8%, 91.4%",
     input: "214.3, 31.8%, 91.4%",
-    ring: "222.2, 84%, 4.9%",
+    ring: "240 5% 64.9%",
     ringOffset: "0, 0.0%, 100.0%",
   },
   spacing: {

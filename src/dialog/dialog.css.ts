@@ -89,7 +89,7 @@ export const dialogCloseButton = style({
     },
     ['&[data-focused="true"]']: {
       outline: "none",
-      boxShadow: `0 0 0 2px ${tokens.color.ring}, 0 0 0 calc(1px + 2px) transparent`,
+      boxShadow: `0 0 0 2px hsl(${tokens.color["ringOffset"]}), 0 0 0 4px hsl(${tokens.color.ring})`,
     },
   },
 });

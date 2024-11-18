@@ -1,6 +1,5 @@
 import { globalStyle } from "@vanilla-extract/css";
 
-// Reset styles
 globalStyle("*", {
   boxSizing: "border-box",
   margin: 0,
@@ -17,7 +16,7 @@ globalStyle("::after, ::before, ::backdrop, ::file-selector-button", {
 
 globalStyle("html, :host", {
   lineHeight: 1.5,
-  WebkitTextSizeAdjust: "100%", // Prevent font size adjustment after orientation changes in iOS
+  WebkitTextSizeAdjust: "100%",
   tabSize: 4,
   fontFamily: `var(--default-font-family, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji')`,
   fontFeatureSettings: "var(--default-font-feature-settings, normal)",
@@ -26,13 +25,13 @@ globalStyle("html, :host", {
 });
 
 globalStyle("body", {
-  lineHeight: "inherit", // Inherit line-height from html
+  lineHeight: "inherit",
 });
 
 globalStyle("hr", {
-  height: 0, // Add correct height in Firefox
-  color: "inherit", // Correct inheritance of border color in Firefox
-  borderTopWidth: "1px", // Reset default border style
+  height: 0,
+  color: "inherit",
+  borderTopWidth: "1px",
 });
 
 globalStyle("abbr:where([title])", {
@@ -80,9 +79,9 @@ globalStyle("sup", {
 });
 
 globalStyle("table", {
-  textIndent: 0, // Remove text indentation in Chrome and Safari
-  borderColor: "inherit", // Correct border color inheritance
-  borderCollapse: "collapse", // Remove gaps between table borders
+  textIndent: 0,
+  borderColor: "inherit",
+  borderCollapse: "collapse",
 });
 
 globalStyle(

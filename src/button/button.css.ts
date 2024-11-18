@@ -21,7 +21,7 @@ export const button = recipe({
       },
       "&:focus-visible": {
         outline: "none",
-        boxShadow: `0 0 0 2px hsl(${tokens.color.ring}), 0 0 0 4px hsl(${tokens.color["ringOffset"]})`,
+        boxShadow: `0 0 0 2px hsl(${tokens.color["ringOffset"]}), 0 0 0 4px hsl(${tokens.color.ring})`,
       },
     },
   },
