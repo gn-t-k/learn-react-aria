@@ -32,7 +32,7 @@ export const button = recipe({
         color: `hsl(${tokens.color["primaryForeground"]})`,
         selectors: {
           "&[data-hovered='true']": {
-            backgroundColor: `hsla(${tokens.color.primary}, 0.9)`,
+            backgroundColor: `hsla(${tokens.color.primary}, 0.8)`,
           },
         },
       },
@@ -41,7 +41,7 @@ export const button = recipe({
         color: `hsl(${tokens.color["destructiveForeground"]})`,
         selectors: {
           "&[data-hovered='true']": {
-            backgroundColor: `hsla(${tokens.color.destructive}, 0.9)`,
+            backgroundColor: `hsla(${tokens.color.destructive}, 0.8)`,
           },
         },
       },

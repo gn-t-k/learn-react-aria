@@ -74,7 +74,7 @@ export const dialogCloseButton = style({
   right: tokens.spacing[4],
   top: tokens.spacing[4],
   borderRadius: tokens.borderRadius.sm,
-  opacity: 0.7,
+  opacity: 0.5,
   transition: "opacity 0.2s",
   selectors: {
     ['&[data-disabled="true"]']: {

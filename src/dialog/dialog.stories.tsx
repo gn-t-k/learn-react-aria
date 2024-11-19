@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import {
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogOverlay,
@@ -27,6 +28,7 @@ export const Default: Story = {
             <>
               <DialogHeader>
                 <DialogTitle>Dialog Title</DialogTitle>
+                <DialogDescription>Dialog Description</DialogDescription>
               </DialogHeader>
               <p>content</p>
               <DialogFooter>
