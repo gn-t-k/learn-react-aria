@@ -1,4 +1,4 @@
-import type { FC, HTMLAttributes } from "react";
+import { useContext, type FC, type HTMLAttributes } from "react";
 import { getLocalTimeZone, today } from "@internationalized/date";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import {
@@ -24,6 +24,9 @@ import {
   Text,
   useLocale,
 } from "react-aria-components";
+import clsx from "clsx";
+
+import * as buttonStyles from "../button/button.css";
 
 export const Calendar = AriaCalendar;
 
@@ -55,6 +58,47 @@ export const CalendarHeading: FC<CalendarHeadingProps> = (props) => {
 };
 
 type CalendarGridProps = AriaCalendarGridProps;
-export const CalendarGrid: FC<CalendarGridProps> = (props) => {
-  return <AriaCalendarGrid {...props} />;
+export const CalendarGrid: FC<CalendarGridProps> = ({
+  className,
+  ...props
+}) => {
+  return <AriaCalendarGrid className={clsx([className])} {...props} />;
+};
+
+type CalendarGridHeaderProps = AriaCalendarGridHeaderProps;
+export const CalendarGridHeader: FC<CalendarGridHeaderProps> = (props) => {
+  return <AriaCalendarGridHeader {...props} />;
+};
+
+type CalendarHeaderCellProps = AriaCalendarHeaderCellProps;
+export const CalendarHeaderCell: FC<CalendarHeaderCellProps> = ({
+  className,
+  ...props
+}) => {
+  return <AriaCalendarHeaderCell className={clsx([className])} {...props} />;
+};
+
+type CalendarGridBodyProps = AriaCalendarGridBodyProps;
+export const CalendarGridBody: FC<CalendarGridBodyProps> = ({
+  className,
+  ...props
+}) => {
+  return <AriaCalendarGridBody className={clsx([className])} {...props} />;
+};
+
+type CalendarCellProps = AriaCalendarCellProps;
+export const CalendarCell: FC<CalendarCellProps> = ({
+  className,
+  ...props
+}) => {
+  const isRange = Boolean(useContext(AriaRangeCalendarStateContext));
+
+  return (
+    <AriaCalendarCell
+      className={composeRenderProps(className, (className, renderProps) =>
+        clsx([buttonStyles.button({ variant: "ghost" }), className])
+      )}
+      {...props}
+    />
+  );
 };
