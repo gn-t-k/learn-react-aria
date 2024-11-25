@@ -34,7 +34,7 @@ export const CalendarHeading: FC<CalendarHeadingProps> = (props) => {
   const { direction } = useLocale();
 
   return (
-    <header>
+    <header {...props}>
       <AriaButton slot="previous">
         {direction === "rtl" ? (
           <ChevronRight aria-hidden />
@@ -52,4 +52,9 @@ export const CalendarHeading: FC<CalendarHeadingProps> = (props) => {
       </AriaButton>
     </header>
   );
+};
+
+type CalendarGridProps = AriaCalendarGridProps;
+export const CalendarGrid: FC<CalendarGridProps> = (props) => {
+  return <AriaCalendarGrid {...props} />;
 };
