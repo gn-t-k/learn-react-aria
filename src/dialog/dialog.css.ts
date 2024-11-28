@@ -95,7 +95,7 @@ export const dialogCloseButton = style({
 });
 
 export const dialogCloseButtonIcon = style({
-  ...tokens.composite.size.icon,
+  ...tokens.composite.size[4],
 });
 
 export const dialogHeader = style({
