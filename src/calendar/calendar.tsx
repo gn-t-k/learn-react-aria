@@ -1,46 +1,26 @@
-import {
-  ComponentProps,
-  useCallback,
-  useContext,
-  useState,
-  type FC,
-  type HTMLAttributes,
-} from "react";
-import { getLocalTimeZone, today } from "@internationalized/date";
+import { useRef, type FC, type HTMLAttributes } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import {
-  Button as AriaButton,
-  Calendar as AriaCalendar,
-  CalendarCell as AriaCalendarCell,
-  CalendarCellProps as AriaCalendarCellProps,
-  CalendarGrid as AriaCalendarGrid,
-  CalendarGridBody as AriaCalendarGridBody,
-  CalendarGridBodyProps as AriaCalendarGridBodyProps,
-  CalendarGridHeader as AriaCalendarGridHeader,
-  CalendarGridHeaderProps as AriaCalendarGridHeaderProps,
-  CalendarGridProps as AriaCalendarGridProps,
-  CalendarHeaderCell as AriaCalendarHeaderCell,
-  CalendarHeaderCellProps as AriaCalendarHeaderCellProps,
-  CalendarProps as AriaCalendarProps,
-  DateValue as AriaDateValue,
-  Heading as AriaHeading,
-  RangeCalendar as AriaRangeCalendar,
-  RangeCalendarProps as AriaRangeCalendarProps,
-  RangeCalendarStateContext as AriaRangeCalendarStateContext,
-  composeRenderProps,
-  Text,
-  useLocale,
-} from "react-aria-components";
-import clsx from "clsx";
 
 import * as styles from "./calendar.css";
 
-import * as buttonStyles from "../button/button.css";
-import { useCalendar, useCalendarGrid } from "react-aria";
+import {
+  useCalendar,
+  useCalendarGrid,
+  useCalendarCell,
+  useHover,
+  useLocale,
+  AriaCalendarGridProps,
+  AriaCalendarProps,
+} from "react-aria";
 import { useCalendarState, CalendarState } from "react-stately";
-import { createCalendar } from "@internationalized/date";
+import {
+  createCalendar,
+  getWeeksInMonth,
+  CalendarDate,
+} from "@internationalized/date";
 import { Button } from "../button/button";
 import { AriaButtonProps } from "@react-types/button";
+import { DateValue } from "@react-types/calendar";
 
 type CalendarHeadingProps = {
   headerProps?: HTMLAttributes<HTMLHeadingElement>;
@@ -70,72 +50,78 @@ const CalendarHeading: FC<CalendarHeadingProps> = ({
 type CalendarGridProps = AriaCalendarGridProps & {
   state: CalendarState;
 };
-const CalendarGrid: FC<CalendarGridProps> = ({
-  className,
-  state,
-  ...props
-}) => {
+const CalendarGrid: FC<CalendarGridProps> = ({ state, ...props }) => {
   const { locale } = useLocale();
   const { gridProps, headerProps, weekDays } = useCalendarGrid(props, state);
-
-  return <table {...gridProps}></table>;
+  const weeksInMonth = getWeeksInMonth(state.visibleRange.start, locale);
 
   return (
-    <AriaCalendarGrid className={clsx([styles.grid, className])} {...props} />
+    <table {...gridProps} className={styles.grid}>
+      <thead {...headerProps}>
+        <tr>
+          {weekDays.map((day, index) => (
+            <th className={styles.gridHeaderCell} key={index}>
+              {day}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody className={styles.gridBody}>
+        {Array.from({ length: weeksInMonth }).map((_, weekIndex) => (
+          <tr key={weekIndex}>
+            {state
+              .getDatesInWeek(weekIndex)
+              .map((date, i) =>
+                date ? (
+                  <CalendarCell key={i} state={state} date={date} />
+                ) : (
+                  <td key={i} />
+                )
+              )}
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 };
 
-type CalendarGridHeaderProps = AriaCalendarGridHeaderProps;
-const CalendarGridHeader: FC<CalendarGridHeaderProps> = (props) => {
-  return <AriaCalendarGridHeader {...props} />;
+type CalendarCellProps = {
+  state: CalendarState;
+  date: CalendarDate;
 };
+const CalendarCell: FC<CalendarCellProps> = ({ state, date }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const {
+    cellProps,
+    buttonProps,
+    isSelected,
+    isOutsideVisibleRange,
+    isDisabled,
+    formattedDate,
+  } = useCalendarCell({ date }, state, ref);
+  const { hoverProps, isHovered } = useHover({ isDisabled });
 
-type CalendarHeaderCellProps = AriaCalendarHeaderCellProps;
-const CalendarHeaderCell: FC<CalendarHeaderCellProps> = ({
-  className,
-  ...props
-}) => {
   return (
-    <AriaCalendarHeaderCell
-      className={clsx([styles.gridHeaderCell, className])}
-      {...props}
-    />
+    <td {...cellProps}>
+      <div
+        {...buttonProps}
+        {...hoverProps}
+        data-hovered={isHovered}
+        ref={ref}
+        hidden={isOutsideVisibleRange}
+        className={styles.cell({
+          isDisabled,
+          isSelected,
+        })}
+      >
+        {formattedDate}
+      </div>
+    </td>
   );
 };
 
-type CalendarGridBodyProps = AriaCalendarGridBodyProps;
-const CalendarGridBody: FC<CalendarGridBodyProps> = ({
-  className,
-  ...props
-}) => {
-  return (
-    <AriaCalendarGridBody
-      className={clsx([styles.gridBody, className])}
-      {...props}
-    />
-  );
-};
-
-type CalendarCellProps = AriaCalendarCellProps;
-const CalendarCell: FC<CalendarCellProps> = ({ className, ...props }) => {
-  return (
-    <AriaCalendarCell
-      className={composeRenderProps(className, (className, renderProps) =>
-        clsx([
-          styles.cell({
-            isDisabled: renderProps.isDisabled,
-            isSelected: renderProps.isSelected,
-          }),
-          className,
-        ])
-      )}
-      {...props}
-    />
-  );
-};
-
-type CalendarProps = AriaCalendarProps<AriaDateValue>;
-export const Calendar: FC<CalendarProps> = ({ className, ...props }) => {
+type CalendarProps = AriaCalendarProps<DateValue>;
+export const Calendar: FC<CalendarProps> = (props) => {
   const { locale } = useLocale();
   const state = useCalendarState({
     ...props,
@@ -146,31 +132,13 @@ export const Calendar: FC<CalendarProps> = ({ className, ...props }) => {
     useCalendar(props, state);
 
   return (
-    <div {...calendarProps}>
+    <div {...calendarProps} className={styles.wrapper}>
       <CalendarHeading
         prevButtonProps={prevButtonProps}
         nextButtonProps={nextButtonProps}
         title={title}
       />
+      <CalendarGrid state={state} />
     </div>
-  );
-
-  return (
-    <AriaCalendar
-      className={composeRenderProps(className, (className) =>
-        clsx([styles.wrapper, className])
-      )}
-      {...props}
-    >
-      <CalendarHeading />
-      <CalendarGrid>
-        <CalendarGridHeader>
-          {(day) => <CalendarHeaderCell>{day}</CalendarHeaderCell>}
-        </CalendarGridHeader>
-        <CalendarGridBody>
-          {(date) => <CalendarCell date={date} />}
-        </CalendarGridBody>
-      </CalendarGrid>
-    </AriaCalendar>
   );
 };
