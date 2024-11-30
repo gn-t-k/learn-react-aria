@@ -36,35 +36,50 @@ import clsx from "clsx";
 import * as styles from "./calendar.css";
 
 import * as buttonStyles from "../button/button.css";
+import { useCalendar, useCalendarGrid } from "react-aria";
+import { useCalendarState, CalendarState } from "react-stately";
+import { createCalendar } from "@internationalized/date";
 import { Button } from "../button/button";
+import { AriaButtonProps } from "@react-types/button";
 
-type CalendarHeadingProps = HTMLAttributes<HTMLElement>;
-const CalendarHeading: FC<CalendarHeadingProps> = (props) => {
-  const { direction } = useLocale();
-
+type CalendarHeadingProps = {
+  headerProps?: HTMLAttributes<HTMLHeadingElement>;
+  prevButtonProps?: AriaButtonProps;
+  nextButtonProps?: AriaButtonProps;
+  title: string;
+};
+const CalendarHeading: FC<CalendarHeadingProps> = ({
+  headerProps,
+  prevButtonProps,
+  nextButtonProps,
+  title,
+}) => {
   return (
-    <header className={styles.headingWrapper} {...props}>
-      <Button variant="ghost" size="sm" slot="previous">
-        {direction === "rtl" ? (
-          <ChevronRight aria-hidden className={styles.headingButton} />
-        ) : (
-          <ChevronLeft aria-hidden className={styles.headingButton} />
-        )}
+    <header className={styles.headingWrapper} {...headerProps}>
+      <Button variant="ghost" size="sm" slot="previous" {...prevButtonProps}>
+        <ChevronLeft aria-hidden className={styles.headingButton} />
       </Button>
-      <AriaHeading className={styles.heading} />
-      <Button variant="ghost" size="sm" slot="next">
-        {direction === "rtl" ? (
-          <ChevronLeft aria-hidden className={styles.headingButton} />
-        ) : (
-          <ChevronRight aria-hidden className={styles.headingButton} />
-        )}
+      <time className={styles.heading}>{title}</time>
+      <Button variant="ghost" size="sm" slot="next" {...nextButtonProps}>
+        <ChevronRight aria-hidden className={styles.headingButton} />
       </Button>
     </header>
   );
 };
 
-type CalendarGridProps = AriaCalendarGridProps;
-const CalendarGrid: FC<CalendarGridProps> = ({ className, ...props }) => {
+type CalendarGridProps = AriaCalendarGridProps & {
+  state: CalendarState;
+};
+const CalendarGrid: FC<CalendarGridProps> = ({
+  className,
+  state,
+  ...props
+}) => {
+  const { locale } = useLocale();
+  const { gridProps, headerProps, weekDays } = useCalendarGrid(props, state);
+
+  return <table {...gridProps}></table>;
+
   return (
     <AriaCalendarGrid className={clsx([styles.grid, className])} {...props} />
   );
@@ -121,6 +136,25 @@ const CalendarCell: FC<CalendarCellProps> = ({ className, ...props }) => {
 
 type CalendarProps = AriaCalendarProps<AriaDateValue>;
 export const Calendar: FC<CalendarProps> = ({ className, ...props }) => {
+  const { locale } = useLocale();
+  const state = useCalendarState({
+    ...props,
+    locale,
+    createCalendar,
+  });
+  const { calendarProps, prevButtonProps, nextButtonProps, title } =
+    useCalendar(props, state);
+
+  return (
+    <div {...calendarProps}>
+      <CalendarHeading
+        prevButtonProps={prevButtonProps}
+        nextButtonProps={nextButtonProps}
+        title={title}
+      />
+    </div>
+  );
+
   return (
     <AriaCalendar
       className={composeRenderProps(className, (className) =>
