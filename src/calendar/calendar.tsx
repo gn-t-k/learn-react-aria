@@ -26,12 +26,14 @@ type CalendarHeadingProps = {
   headerProps?: HTMLAttributes<HTMLHeadingElement>;
   prevButtonProps?: AriaButtonProps;
   nextButtonProps?: AriaButtonProps;
+  clearButtonProps?: AriaButtonProps;
   title: string;
 };
 const CalendarHeading: FC<CalendarHeadingProps> = ({
   headerProps,
   prevButtonProps,
   nextButtonProps,
+  clearButtonProps,
   title,
 }) => {
   return (
@@ -40,6 +42,9 @@ const CalendarHeading: FC<CalendarHeadingProps> = ({
         <ChevronLeft aria-hidden className={styles.headingButton} />
       </Button>
       <time className={styles.heading}>{title}</time>
+      <Button size="sm" variant="outline" {...clearButtonProps}>
+        選択を解除
+      </Button>
       <Button variant="ghost" size="sm" slot="next" {...nextButtonProps}>
         <ChevronRight aria-hidden className={styles.headingButton} />
       </Button>
@@ -91,14 +96,8 @@ type CalendarCellProps = {
 };
 const CalendarCell: FC<CalendarCellProps> = ({ state, date }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const {
-    cellProps,
-    buttonProps,
-    isSelected,
-    isOutsideVisibleRange,
-    isDisabled,
-    formattedDate,
-  } = useCalendarCell({ date }, state, ref);
+  const { cellProps, buttonProps, isSelected, isDisabled, formattedDate } =
+    useCalendarCell({ date }, state, ref);
   const { hoverProps, isHovered } = useHover({ isDisabled });
 
   return (
@@ -108,7 +107,6 @@ const CalendarCell: FC<CalendarCellProps> = ({ state, date }) => {
         {...hoverProps}
         data-hovered={isHovered}
         ref={ref}
-        hidden={isOutsideVisibleRange}
         className={styles.cell({
           isDisabled,
           isSelected,
@@ -136,6 +134,10 @@ export const Calendar: FC<CalendarProps> = (props) => {
       <CalendarHeading
         prevButtonProps={prevButtonProps}
         nextButtonProps={nextButtonProps}
+        clearButtonProps={{
+          isDisabled: state.value === null,
+          onPress: (_) => state.setValue(null),
+        }}
         title={title}
       />
       <CalendarGrid state={state} />
