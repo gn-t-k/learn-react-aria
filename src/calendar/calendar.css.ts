@@ -14,7 +14,7 @@ export const headingWrapper = style({
   padding: `${tokens.spacing[1]} 0 ${tokens.spacing[4]}`,
 });
 
-export const headingButton = style({
+export const headingButtonIcon = style({
   ...tokens.composite.size[4],
 });
 
@@ -45,39 +45,39 @@ globalStyle(`${gridBody} > tr > td`, {
 
 export const cell = recipe({
   base: {
-    position: "relative",
-    display: "flex",
-    ...tokens.composite.size[9],
-    alignItems: "center",
-    justifyContent: "center",
-    padding: "0",
-    ...tokens.composite.text.sm,
-    fontWeight: tokens.fontWeight.normal,
     border: 0,
     backgroundColor: `hsl(${tokens.color.background})`,
+    display: "inline-flex",
+    justifyContent: "center",
     whiteSpace: "nowrap",
-    borderRadius: tokens.borderRadius.sm,
+    borderRadius: tokens.borderRadius.md,
+    ...tokens.composite.text.sm,
+    fontWeight: tokens.fontWeight.medium,
     transition: "color 0.2s, background-color 0.2s",
+    position: "relative",
+    padding: `0 ${tokens.spacing[3]}`,
+    ...tokens.composite.size[9],
     selectors: {
-      "&[data-disabled='true']": {
+      "&:disabled": {
         pointerEvents: "none",
-        opacity: "0.5",
+        color: `hsl(${tokens.color.mutedForeground})`,
+        opacity: 0.5,
       },
       "&:focus-visible": {
         outline: "none",
         boxShadow: `0 0 0 2px hsl(${tokens.color["ringOffset"]}), 0 0 0 4px hsl(${tokens.color.ring})`,
       },
-      "&[data-hovered='true']": {
+      "&:hover": {
         backgroundColor: `hsl(${tokens.color.accent})`,
         color: `hsl(${tokens.color["accentForeground"]})`,
       },
     },
   },
   variants: {
-    isDisabled: {
+    isToday: {
       true: {
-        color: `hsl(${tokens.color.mutedForeground})`,
-        opacity: 0.5,
+        backgroundColor: `hsl(${tokens.color.accent})`,
+        color: `hsl(${tokens.color["accentForeground"]})`,
       },
     },
     isSelected: {
@@ -96,5 +96,33 @@ export const cell = recipe({
         },
       },
     },
+    hasEvent: {
+      true: {
+        selectors: {
+          "&::after": {
+            content: "",
+            position: "absolute",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            top: "75%",
+            ...tokens.composite.size[2],
+            borderRadius: tokens.borderRadius.full,
+            backgroundColor: `hsl(${tokens.color.primary})`,
+          },
+        },
+      },
+    },
   },
+  compoundVariants: [
+    {
+      variants: { isSelected: true, hasEvent: true },
+      style: {
+        selectors: {
+          "&::after": {
+            backgroundColor: `hsl(${tokens.color.primaryForeground})`,
+          },
+        },
+      },
+    },
+  ],
 });
