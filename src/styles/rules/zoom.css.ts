@@ -14,7 +14,7 @@ type ZoomIn = (
 ) => StyleRule;
 export const zoomIn: ZoomIn = (props) =>
   deepmerge.all<StyleRule>([
-    enterBase(),
+    enterBase(props?.duration),
     {
       vars: {
         [enterScale]: props?.enterScale ?? "0.95",
@@ -28,7 +28,7 @@ type ZoomOut = (props?: {
 }) => StyleRule;
 export const zoomOut: ZoomOut = (props) =>
   deepmerge.all<StyleRule>([
-    exitBase(),
+    exitBase(props?.duration),
     {
       vars: {
         [exitScale]: props?.exitScale ?? "0.95",

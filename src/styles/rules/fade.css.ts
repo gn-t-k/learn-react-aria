@@ -10,7 +10,7 @@ type FadeIn = (props?: {
 }) => StyleRule;
 export const fadeIn: FadeIn = (props) =>
   deepmerge.all<StyleRule>([
-    enterBase(),
+    enterBase(props?.duration),
     {
       vars: {
         [enterOpacity]: props?.enterOpacity ?? "0%",
@@ -24,7 +24,7 @@ type FadeOut = (props?: {
 }) => StyleRule;
 export const fadeOut: FadeOut = (props) =>
   deepmerge.all<StyleRule>([
-    exitBase(),
+    exitBase(props?.duration),
     {
       vars: {
         [exitOpacity]: props?.exitOpacity ?? "0%",

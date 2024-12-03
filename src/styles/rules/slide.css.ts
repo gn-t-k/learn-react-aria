@@ -91,7 +91,7 @@ type SlideOutToTop = (
 ) => StyleRule;
 export const slideOutToTop: SlideOutToTop = (props) =>
   deepmerge.all<StyleRule>([
-    exitBase(),
+    exitBase(props?.duration),
     {
       vars: {
         [exitTranslateY]: `-${props?.exitTranslateY ?? "100%"}`,
@@ -109,7 +109,7 @@ type SlideOutToBottom = (
 ) => StyleRule;
 export const slideOutToBottom: SlideOutToBottom = (props) =>
   deepmerge.all<StyleRule>([
-    exitBase(),
+    exitBase(props?.duration),
     {
       vars: {
         [exitTranslateY]: props?.exitTranslateY ?? "100%",
@@ -127,7 +127,7 @@ type SlideOutToLeft = (
 ) => StyleRule;
 export const slideOutToLeft: SlideOutToLeft = (props) =>
   deepmerge.all<StyleRule>([
-    exitBase(),
+    exitBase(props?.duration),
     {
       vars: {
         [exitTranslateX]: `-${props?.exitTranslateX ?? "100%"}`,
@@ -145,7 +145,7 @@ type SlideOutToRight = (
 ) => StyleRule;
 export const slideOutToRight: SlideOutToRight = (props) =>
   deepmerge.all<StyleRule>([
-    exitBase(),
+    exitBase(props?.duration),
     {
       vars: {
         [exitTranslateX]: props?.exitTranslateX ?? "100%",
