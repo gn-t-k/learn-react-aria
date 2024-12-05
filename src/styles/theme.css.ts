@@ -1,33 +1,34 @@
-import "./base.css";
-
-import { createGlobalTheme } from "@vanilla-extract/css";
+import { createTheme } from "@vanilla-extract/css";
 import { spin } from "./keyframes/spin.css";
 import { ping } from "./keyframes/ping.css";
 import { pulse } from "./keyframes/pulse.css";
 import { bounce } from "./keyframes/bounce.css";
 
-export const tokens = createGlobalTheme(":root", {
+const baseTokens = {
   color: {
-    background: "0, 0%, 100%",
-    foreground: "222.2, 84%, 4.9%",
-    card: "0, 0%, 100%",
-    cardForeground: "222.2, 84%, 4.9%",
-    popover: "0, 0%, 100%",
-    popoverForeground: "222.2, 84%, 4.9%",
-    primary: "222.2, 47.4%, 11.2%",
-    primaryForeground: "210, 40%, 98%",
-    secondary: "210, 40%, 96.1%",
-    secondaryForeground: "222.2, 47.4%, 11.2%",
-    muted: "210, 40%, 96.1%",
-    mutedForeground: "215.4, 16.3%, 46.9%",
-    accent: "210, 40%, 96.1%",
-    accentForeground: "222.2, 47.4%, 11.2%",
-    destructive: "0, 84.2%, 60.2%",
-    destructiveForeground: "210, 40%, 98%",
-    border: "214.3, 31.8%, 91.4%",
-    input: "214.3, 31.8%, 91.4%",
-    ring: "240 5% 64.9%",
-    ringOffset: "0, 0.0%, 100.0%",
+    background: "hsl(0 0% 100%)",
+    foreground: "hsl(240 10% 3.9%)",
+    card: "hsl(0, 0%, 100%)",
+    cardForeground: "hsl(240 10% 3.9%)",
+    popover: "hsl(0, 0%, 100%)",
+    popoverForeground: "hsl(240 10% 3.9%)",
+    muted: "hsl(240 4.8% 95.9%)",
+    mutedForeground: "hsl(240 3.8% 46.1%)",
+    accent: "hsl(240 4.8% 95.9%)",
+    accentForeground: "hsl(240 5.9% 10%)",
+    primary: "hsl(240, 5.9%, 10%)",
+    primaryHovered: "hsla(240, 5.9%, 10%, 0.8)",
+    primaryForeground: "hsl(0 0% 98%)",
+    secondary: "hsl(240 4.8% 95.9%)",
+    secondaryHovered: "hsla(240, 4.8%, 95.9%, 0.8)",
+    secondaryForeground: "hsl(240 5.9% 10%)",
+    destructive: "hsl(0 72.22% 50.59%)",
+    destructiveHovered: "hsla(0, 72.22%, 50.59%, 0.8)",
+    destructiveForeground: "hsl(0 0% 98%)",
+    border: "hsl(240 5.9% 90%)",
+    input: "hsl(240 5.9% 90%)",
+    ring: "hsl(240 5% 64.9%)",
+    ringOffset: "hsl(0, 0.0%, 100.0%)",
   },
   spacing: {
     "1": "0.25rem",
@@ -284,5 +285,36 @@ export const tokens = createGlobalTheme(":root", {
         height: "2.5rem",
       },
     },
+  },
+};
+
+export const [lightTheme, tokens] = createTheme(baseTokens);
+
+export const darkTheme = createTheme(tokens, {
+  ...baseTokens,
+  color: {
+    background: "hsl(240 10% 3.9%)",
+    foreground: "hsl(0 0% 98%)",
+    card: "hsl(240 10% 3.9%)",
+    cardForeground: "hsl(0 0% 98%)",
+    popover: "hsl(240 10% 3.9%)",
+    popoverForeground: "hsl(0 0% 98%)",
+    muted: "hsl(240 3.7% 15.9%)",
+    mutedForeground: "hsl(240 5% 64.9%)",
+    accent: "hsl(240 3.7% 15.9%)",
+    accentForeground: "hsl(0 0% 98%)",
+    primary: "hsl(0 0% 98%)",
+    primaryHovered: "hsla(0 0%, 98%, 0.8)",
+    primaryForeground: "hsl(240 5.9% 10%)",
+    secondary: "hsl(240 3.7% 15.9%)",
+    secondaryHovered: "hsla(240, 3.7%, 15.9%, 0.8)",
+    secondaryForeground: "hsl(0 0% 98%)",
+    destructive: "hsl(0 62.8% 30.6%)",
+    destructiveHovered: "hsla(0, 62.8%, 30.6%, 0.8)",
+    destructiveForeground: "hsl(0 85.7% 97.3%)",
+    border: "hsl(240 3.7% 15.9%)",
+    input: "hsl(240 3.7% 15.9%)",
+    ring: "hsl(240 4.9% 83.9%)",
+    ringOffset: "hsl(240 10% 3.9%)",
   },
 });

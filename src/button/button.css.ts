@@ -1,10 +1,11 @@
 import { recipe, RecipeVariants } from "@vanilla-extract/recipes";
-import { tokens } from "../styles/tokens.css";
+import { tokens } from "../styles/theme.css";
 
 export const button = recipe({
   base: {
     border: 0,
-    backgroundColor: `hsl(${tokens.color.background})`,
+    color: tokens.color.foreground,
+    backgroundColor: tokens.color.background,
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
@@ -21,59 +22,57 @@ export const button = recipe({
       },
       "&:focus-visible": {
         outline: "none",
-        boxShadow: `0 0 0 2px hsl(${tokens.color["ringOffset"]}), 0 0 0 4px hsl(${tokens.color.ring})`,
+        boxShadow: `0 0 0 2px ${tokens.color["ringOffset"]}), 0 0 0 4px ${tokens.color.ring}`,
       },
     },
   },
   variants: {
     variant: {
       default: {
-        backgroundColor: `hsl(${tokens.color.primary})`,
-        color: `hsl(${tokens.color["primaryForeground"]})`,
+        backgroundColor: tokens.color.primary,
+        color: tokens.color.primaryForeground,
         selectors: {
           "&[data-hovered='true']": {
-            backgroundColor: `hsla(${tokens.color.primary}, 0.8)`,
+            backgroundColor: tokens.color.primaryHovered,
           },
         },
       },
       destructive: {
-        backgroundColor: `hsl(${tokens.color.destructive})`,
-        color: `hsl(${tokens.color["destructiveForeground"]})`,
+        backgroundColor: tokens.color.destructive,
+        color: tokens.color.destructiveForeground,
         selectors: {
           "&[data-hovered='true']": {
-            backgroundColor: `hsla(${tokens.color.destructive}, 0.8)`,
+            backgroundColor: tokens.color.destructiveHovered,
           },
         },
       },
       outline: {
-        border: `1px solid hsl(${tokens.color.input})`,
-        backgroundColor: `hsl(${tokens.color.background})`,
+        border: `1px solid ${tokens.color.input}`,
+        backgroundColor: tokens.color.background,
         selectors: {
           "&[data-hovered='true']": {
-            backgroundColor: `hsl(${tokens.color.accent})`,
-            color: `hsl(${tokens.color["accentForeground"]})`,
+            backgroundColor: tokens.color.accent,
           },
         },
       },
       secondary: {
-        backgroundColor: `hsl(${tokens.color.secondary})`,
-        color: `hsl(${tokens.color["secondaryForeground"]})`,
+        backgroundColor: tokens.color.secondary,
+        color: tokens.color.secondaryForeground,
         selectors: {
           "&[data-hovered='true']": {
-            backgroundColor: `hsla(${tokens.color.secondary}, 0.8)`,
+            backgroundColor: tokens.color.secondaryHovered,
           },
         },
       },
       ghost: {
         selectors: {
           "&[data-hovered='true']": {
-            backgroundColor: `hsl(${tokens.color.accent})`,
-            color: `hsl(${tokens.color["accentForeground"]})`,
+            backgroundColor: tokens.color.accent,
           },
         },
       },
       link: {
-        color: `hsl(${tokens.color.primary})`,
+        color: tokens.color.primary,
         selectors: {
           "&[data-hovered='true']": {
             textDecoration: "underline",

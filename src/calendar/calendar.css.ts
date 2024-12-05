@@ -1,5 +1,5 @@
 import { globalStyle, style } from "@vanilla-extract/css";
-import { tokens } from "../styles/tokens.css";
+import { tokens } from "../styles/theme.css";
 import { recipe } from "@vanilla-extract/recipes";
 
 export const wrapper = style({
@@ -23,6 +23,8 @@ export const heading = style({
   textAlign: "center",
   ...tokens.composite.text.sm,
   fontWeight: tokens.fontWeight.medium,
+  backgroundColor: tokens.color.background,
+  color: tokens.color.foreground,
 });
 
 export const grid = style({
@@ -35,7 +37,7 @@ export const gridHeaderCell = style({
   borderRadius: tokens.borderRadius.md,
   ...tokens.composite.text.sm,
   fontWeight: tokens.fontWeight.normal,
-  color: `hsl(${tokens.color.mutedForeground})`,
+  color: tokens.color.mutedForeground,
 });
 
 export const gridBody = style({});
@@ -46,7 +48,8 @@ globalStyle(`${gridBody} > tr > td`, {
 export const cell = recipe({
   base: {
     border: 0,
-    backgroundColor: `hsl(${tokens.color.background})`,
+    color: tokens.color.foreground,
+    backgroundColor: tokens.color.background,
     display: "inline-flex",
     justifyContent: "center",
     whiteSpace: "nowrap",
@@ -60,38 +63,38 @@ export const cell = recipe({
     selectors: {
       "&:disabled": {
         pointerEvents: "none",
-        color: `hsl(${tokens.color.mutedForeground})`,
+        color: tokens.color.mutedForeground,
         opacity: 0.5,
       },
       "&:focus-visible": {
         outline: "none",
-        boxShadow: `0 0 0 2px hsl(${tokens.color["ringOffset"]}), 0 0 0 4px hsl(${tokens.color.ring})`,
+        boxShadow: `0 0 0 2px ${tokens.color["ringOffset"]}), 0 0 0 4px ${tokens.color.ring}`,
       },
       "&:hover": {
-        backgroundColor: `hsl(${tokens.color.accent})`,
-        color: `hsl(${tokens.color["accentForeground"]})`,
+        backgroundColor: tokens.color.accent,
+        color: tokens.color.accentForeground,
       },
     },
   },
   variants: {
     isToday: {
       true: {
-        backgroundColor: `hsl(${tokens.color.accent})`,
-        color: `hsl(${tokens.color["accentForeground"]})`,
+        backgroundColor: tokens.color.accent,
+        color: tokens.color.accentForeground,
       },
     },
     isSelected: {
       true: {
-        backgroundColor: `hsl(${tokens.color.primary})`,
-        color: `hsl(${tokens.color.primaryForeground})`,
+        backgroundColor: tokens.color.primary,
+        color: tokens.color.primaryForeground,
         selectors: {
           "&:focus": {
-            backgroundColor: `hsl(${tokens.color.primary})`,
-            color: `hsl(${tokens.color.primaryForeground})`,
+            backgroundColor: tokens.color.primary,
+            color: tokens.color.primaryForeground,
           },
           "&:hover": {
-            backgroundColor: `hsl(${tokens.color.primary})`,
-            color: `hsl(${tokens.color.primaryForeground})`,
+            backgroundColor: tokens.color.primary,
+            color: tokens.color.primaryForeground,
           },
         },
       },
@@ -107,7 +110,8 @@ export const cell = recipe({
             top: "75%",
             ...tokens.composite.size[2],
             borderRadius: tokens.borderRadius.full,
-            backgroundColor: `hsl(${tokens.color.primary})`,
+            backgroundColor: tokens.color.primary,
+            color: tokens.color.primaryForeground,
           },
         },
       },
@@ -119,7 +123,7 @@ export const cell = recipe({
       style: {
         selectors: {
           "&::after": {
-            backgroundColor: `hsl(${tokens.color.primaryForeground})`,
+            backgroundColor: tokens.color.primaryForeground,
           },
         },
       },

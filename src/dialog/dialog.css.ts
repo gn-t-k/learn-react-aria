@@ -1,4 +1,4 @@
-import { tokens } from "../styles/tokens.css";
+import { tokens } from "../styles/theme.css";
 import {
   slideInFromLeft,
   slideInFromTop,
@@ -40,8 +40,9 @@ export const dialogContentModal = style({
   width: "100%",
   maxWidth: tokens.maxWidth.lg,
   transform: "translate(-50%, -50%)",
-  border: `1px solid hsl(${tokens.color.border})`,
-  backgroundColor: `hsl(${tokens.color.background})`,
+  border: `1px solid ${tokens.color.border}`,
+  color: tokens.color.foreground,
+  backgroundColor: tokens.color.background,
   padding: tokens.spacing[6],
   boxShadow: tokens.boxShadow.lg,
   gap: tokens.spacing[4],
@@ -81,15 +82,15 @@ export const dialogCloseButton = style({
       pointerEvents: "none",
     },
     ['&[data-entering="true"]']: {
-      backgroundColor: `hsl(${tokens.color.accent})`,
-      color: `hsl(${tokens.color.mutedForeground})`,
+      backgroundColor: tokens.color.accent,
+      color: tokens.color.mutedForeground,
     },
     ['&[data-hovered="true"]']: {
       opacity: 1,
     },
     ['&[data-focused="true"]']: {
       outline: "none",
-      boxShadow: `0 0 0 2px hsl(${tokens.color["ringOffset"]}), 0 0 0 4px hsl(${tokens.color.ring})`,
+      boxShadow: `0 0 0 2px ${tokens.color["ringOffset"]}), 0 0 0 4px ${tokens.color.ring}`,
     },
   },
 });
