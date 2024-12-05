@@ -1,4 +1,10 @@
-import { useCallback, useRef, type FC, type HTMLAttributes } from "react";
+import {
+  useCallback,
+  useMemo,
+  useRef,
+  type FC,
+  type HTMLAttributes,
+} from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import * as styles from "./calendar.css";
@@ -40,6 +46,10 @@ export const Calendar: FC<CalendarProps> = ({
   });
   const { calendarProps, prevButtonProps, nextButtonProps, title } =
     useCalendar(props, state);
+  const eventDatesSet = useMemo(
+    () => new Set(eventDates.map((date) => date.toString())),
+    [eventDates]
+  );
 
   return (
     <div {...calendarProps} className={styles.wrapper}>
@@ -52,7 +62,7 @@ export const Calendar: FC<CalendarProps> = ({
         state={state}
         selectedDate={state.value}
         today={today}
-        eventDates={eventDates}
+        eventDatesSet={eventDatesSet}
       />
     </div>
   );
@@ -87,13 +97,13 @@ type CalendarGridProps = AriaCalendarGridProps & {
   state: CalendarState;
   selectedDate: CalendarDate | null;
   today: CalendarDate;
-  eventDates: CalendarDate[];
+  eventDatesSet: Set<string>;
 };
 const CalendarGrid: FC<CalendarGridProps> = ({
   state,
   selectedDate,
   today,
-  eventDates,
+  eventDatesSet,
   ...props
 }) => {
   const { locale } = useLocale();
@@ -118,7 +128,7 @@ const CalendarGrid: FC<CalendarGridProps> = ({
             state={state}
             weekIndex={weekIndex}
             today={today}
-            eventDates={eventDates}
+            eventDatesSet={eventDatesSet}
           />
         ))}
       </tbody>
@@ -130,31 +140,34 @@ type CalendarRowProps = {
   state: CalendarState;
   weekIndex: number;
   today: CalendarDate;
-  eventDates: CalendarDate[];
+  eventDatesSet: Set<string>;
 };
 const CalendarRow: FC<CalendarRowProps> = ({
   state,
   weekIndex,
   today,
-  eventDates,
+  eventDatesSet,
 }) => {
+  const datesInWeek = useMemo(
+    () => state.getDatesInWeek(weekIndex),
+    [state.getDatesInWeek, weekIndex]
+  );
+
   return (
     <tr>
-      {state
-        .getDatesInWeek(weekIndex)
-        .map((date, i) =>
-          date ? (
-            <CalendarCell
-              key={i}
-              state={state}
-              date={date}
-              isToday={date.compare(today) === 0}
-              hasEvent={eventDates.some((event) => event.compare(date) === 0)}
-            />
-          ) : (
-            <td key={i} />
-          )
-        )}
+      {datesInWeek.map((date, i) =>
+        date ? (
+          <CalendarCell
+            key={i}
+            state={state}
+            date={date}
+            isToday={date.compare(today) === 0}
+            hasEvent={eventDatesSet.has(date.toString())}
+          />
+        ) : (
+          <td key={i} />
+        )
+      )}
     </tr>
   );
 };
