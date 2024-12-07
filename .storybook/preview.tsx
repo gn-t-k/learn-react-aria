@@ -1,7 +1,6 @@
 import type { Preview } from "@storybook/react";
 import "../src/styles/base.css";
-import { lightTheme } from "../src/styles/theme.css";
-import { useEffect } from "react";
+import { ThemeProvider } from "../src/use-theme/use-theme";
 
 const preview: Preview = {
   parameters: {
@@ -14,15 +13,11 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => {
-      useEffect(() => {
-        document.body.classList.add(lightTheme);
-
-        return () => {
-          document.body.classList.remove(lightTheme);
-        };
-      }, []);
-
-      return <Story />;
+      return (
+        <ThemeProvider>
+          <Story />
+        </ThemeProvider>
+      );
     },
   ],
 };

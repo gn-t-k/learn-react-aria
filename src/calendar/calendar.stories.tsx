@@ -3,6 +3,8 @@ import { Calendar } from "./calendar";
 import { DateValue } from "@react-types/calendar";
 import { parseDate } from "@internationalized/date";
 import { useCallback, useState } from "react";
+import { useTheme } from "../use-theme/use-theme";
+import { Button } from "../button/button";
 
 const meta: Meta<typeof Calendar> = {
   component: Calendar,
@@ -13,6 +15,7 @@ type Story = StoryObj<typeof Calendar>;
 
 export const Default: Story = {
   render: () => {
+    const { theme, toggleTheme } = useTheme();
     const today = parseDate("2024-12-18");
     const [selected, setSelected] = useState<DateValue | null>(null);
 
@@ -31,6 +34,7 @@ export const Default: Story = {
           )}
         />
         <p>{selected ? selected.toString() : "No date selected"}</p>
+        <Button onPress={toggleTheme}>{theme}</Button>
       </div>
     );
   },
