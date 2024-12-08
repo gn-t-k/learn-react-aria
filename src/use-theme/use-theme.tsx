@@ -9,19 +9,26 @@ import {
 } from "react";
 import { darkTheme, lightTheme } from "../styles/theme.css";
 
+type ThemeContextType = {
+  theme: "light" | "dark";
+  toggleTheme: () => void;
+};
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+
 type UseTheme = () => ThemeContextType;
 export const useTheme: UseTheme = () => {
   const context = useContext(ThemeContext);
   if (context === undefined) {
     throw new Error("useTheme must be used within a ThemeProvider");
   }
+
   return context;
 };
 
 export const ThemeProvider: FC<PropsWithChildren> = ({ children }) => {
   const [theme, setTheme] = useState<ThemeContextType["theme"]>("light");
 
-  const toggleTheme: ThemeContextType["toggleTheme"] = useCallback(() => {
+  const toggleTheme = useCallback<ThemeContextType["toggleTheme"]>(() => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
   }, []);
 
@@ -30,21 +37,11 @@ export const ThemeProvider: FC<PropsWithChildren> = ({ children }) => {
       return;
     }
 
-    if (theme === "light") {
-      document.documentElement.classList.add(lightTheme);
-      document.documentElement.classList.remove(darkTheme);
-    } else {
-      document.documentElement.classList.add(darkTheme);
-      document.documentElement.classList.remove(lightTheme);
-    }
+    const [added, removed] =
+      theme === "light" ? [lightTheme, darkTheme] : [darkTheme, lightTheme];
 
-    return () => {
-      if (theme === "light") {
-        document.documentElement.classList.remove(lightTheme);
-      } else {
-        document.documentElement.classList.remove(darkTheme);
-      }
-    };
+    document.documentElement.classList.add(added);
+    document.documentElement.classList.remove(removed);
   }, [theme]);
 
   return (
@@ -53,9 +50,3 @@ export const ThemeProvider: FC<PropsWithChildren> = ({ children }) => {
     </ThemeContext.Provider>
   );
 };
-
-type ThemeContextType = {
-  theme: "light" | "dark";
-  toggleTheme: () => void;
-};
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
