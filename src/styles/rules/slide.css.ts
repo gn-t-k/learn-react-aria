@@ -5,9 +5,9 @@ import {
   exitTranslateX,
   exitTranslateY,
 } from "../vars.css";
-import deepmerge from "deepmerge";
-import { enterBase } from "./enter-base.css";
-import { exitBase } from "./exit-base.css";
+import { enter } from "../keyframes/enter.css";
+import { tokens } from "../theme.css";
+import { exit } from "../keyframes/exit.css";
 
 type SlideInFromTop = (
   props?:
@@ -17,15 +17,14 @@ type SlideInFromTop = (
       }
     | undefined
 ) => StyleRule;
-export const slideInFromTop: SlideInFromTop = (props) =>
-  deepmerge.all<StyleRule>([
-    enterBase(props?.duration),
-    {
-      vars: {
-        [enterTranslateY]: `-${props?.enterTranslateY ?? "100%"}`,
-      },
-    },
-  ]);
+export const slideInFromTop: SlideInFromTop = (props) => ({
+  animationName: enter,
+  animationDuration: props?.duration ?? "0.2s",
+  animationTimingFunction: tokens.transitionTimingFunction.easeInOut,
+  vars: {
+    [enterTranslateY]: `-${props?.enterTranslateY ?? "100%"}`,
+  },
+});
 
 type SlideInFromBottom = (
   props?:
@@ -35,15 +34,14 @@ type SlideInFromBottom = (
       }
     | undefined
 ) => StyleRule;
-export const slideInFromBottom: SlideInFromBottom = (props) =>
-  deepmerge.all<StyleRule>([
-    enterBase(props?.duration),
-    {
-      vars: {
-        [enterTranslateY]: props?.enterTranslateY ?? "100%",
-      },
-    },
-  ]);
+export const slideInFromBottom: SlideInFromBottom = (props) => ({
+  animationName: enter,
+  animationDuration: props?.duration ?? "0.2s",
+  animationTimingFunction: tokens.transitionTimingFunction.easeInOut,
+  vars: {
+    [enterTranslateY]: props?.enterTranslateY ?? "100%",
+  },
+});
 
 type SlideInFromLeft = (
   props?:
@@ -53,15 +51,14 @@ type SlideInFromLeft = (
       }
     | undefined
 ) => StyleRule;
-export const slideInFromLeft: SlideInFromLeft = (props) =>
-  deepmerge.all<StyleRule>([
-    enterBase(props?.duration),
-    {
-      vars: {
-        [enterTranslateX]: `-${props?.enterTranslateX ?? "100%"}`,
-      },
-    },
-  ]);
+export const slideInFromLeft: SlideInFromLeft = (props) => ({
+  animationName: enter,
+  animationDuration: props?.duration ?? "0.2s",
+  animationTimingFunction: tokens.transitionTimingFunction.easeInOut,
+  vars: {
+    [enterTranslateX]: `-${props?.enterTranslateX ?? "100%"}`,
+  },
+});
 
 type SlideInFromRight = (
   props?:
@@ -71,15 +68,14 @@ type SlideInFromRight = (
       }
     | undefined
 ) => StyleRule;
-export const slideInFromRight: SlideInFromRight = (props) =>
-  deepmerge.all<StyleRule>([
-    enterBase(props?.duration),
-    {
-      vars: {
-        [enterTranslateX]: props?.enterTranslateX ?? "100%",
-      },
-    },
-  ]);
+export const slideInFromRight: SlideInFromRight = (props) => ({
+  animationName: enter,
+  animationDuration: props?.duration ?? "0.2s",
+  animationTimingFunction: tokens.transitionTimingFunction.easeInOut,
+  vars: {
+    [enterTranslateX]: props?.enterTranslateX ?? "100%",
+  },
+});
 
 type SlideOutToTop = (
   props?:
@@ -89,15 +85,14 @@ type SlideOutToTop = (
       }
     | undefined
 ) => StyleRule;
-export const slideOutToTop: SlideOutToTop = (props) =>
-  deepmerge.all<StyleRule>([
-    exitBase(props?.duration),
-    {
-      vars: {
-        [exitTranslateY]: `-${props?.exitTranslateY ?? "100%"}`,
-      },
-    },
-  ]);
+export const slideOutToTop: SlideOutToTop = (props) => ({
+  animationName: exit,
+  animationDuration: props?.duration ?? "0.3s",
+  animationTimingFunction: tokens.transitionTimingFunction.easeInOut,
+  vars: {
+    [exitTranslateY]: `-${props?.exitTranslateY ?? "100%"}`,
+  },
+});
 
 type SlideOutToBottom = (
   props?:
@@ -107,15 +102,14 @@ type SlideOutToBottom = (
       }
     | undefined
 ) => StyleRule;
-export const slideOutToBottom: SlideOutToBottom = (props) =>
-  deepmerge.all<StyleRule>([
-    exitBase(props?.duration),
-    {
-      vars: {
-        [exitTranslateY]: props?.exitTranslateY ?? "100%",
-      },
-    },
-  ]);
+export const slideOutToBottom: SlideOutToBottom = (props) => ({
+  animationName: exit,
+  animationDuration: props?.duration ?? "0.3s",
+  animationTimingFunction: tokens.transitionTimingFunction.easeInOut,
+  vars: {
+    [exitTranslateY]: props?.exitTranslateY ?? "100%",
+  },
+});
 
 type SlideOutToLeft = (
   props?:
@@ -125,15 +119,14 @@ type SlideOutToLeft = (
       }
     | undefined
 ) => StyleRule;
-export const slideOutToLeft: SlideOutToLeft = (props) =>
-  deepmerge.all<StyleRule>([
-    exitBase(props?.duration),
-    {
-      vars: {
-        [exitTranslateX]: `-${props?.exitTranslateX ?? "100%"}`,
-      },
-    },
-  ]);
+export const slideOutToLeft: SlideOutToLeft = (props) => ({
+  animationName: exit,
+  animationDuration: props?.duration ?? "0.3s",
+  animationTimingFunction: tokens.transitionTimingFunction.easeInOut,
+  vars: {
+    [exitTranslateX]: `-${props?.exitTranslateX ?? "100%"}`,
+  },
+});
 
 type SlideOutToRight = (
   props?:
@@ -143,12 +136,11 @@ type SlideOutToRight = (
       }
     | undefined
 ) => StyleRule;
-export const slideOutToRight: SlideOutToRight = (props) =>
-  deepmerge.all<StyleRule>([
-    exitBase(props?.duration),
-    {
-      vars: {
-        [exitTranslateX]: props?.exitTranslateX ?? "100%",
-      },
-    },
-  ]);
+export const slideOutToRight: SlideOutToRight = (props) => ({
+  animationName: exit,
+  animationDuration: props?.duration ?? "0.3s",
+  animationTimingFunction: tokens.transitionTimingFunction.easeInOut,
+  vars: {
+    [exitTranslateX]: props?.exitTranslateX ?? "100%",
+  },
+});

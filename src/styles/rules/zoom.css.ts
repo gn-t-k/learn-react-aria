@@ -1,8 +1,8 @@
 import { StyleRule } from "@vanilla-extract/css";
-import deepmerge from "deepmerge";
-import { enterBase } from "./enter-base.css";
 import { enterScale, exitScale } from "../vars.css";
-import { exitBase } from "./exit-base.css";
+import { enter } from "../keyframes/enter.css";
+import { tokens } from "../theme.css";
+import { exit } from "../keyframes/exit.css";
 
 type ZoomIn = (
   props?:
@@ -12,26 +12,28 @@ type ZoomIn = (
       }
     | undefined
 ) => StyleRule;
-export const zoomIn: ZoomIn = (props) =>
-  deepmerge.all<StyleRule>([
-    enterBase(props?.duration),
-    {
-      vars: {
-        [enterScale]: props?.enterScale ?? "0.95",
-      },
-    },
-  ]);
+export const zoomIn: ZoomIn = (props) => ({
+  animationName: enter,
+  animationDuration: props?.duration ?? "0.2s",
+  animationTimingFunction: tokens.transitionTimingFunction.easeInOut,
+  vars: {
+    [enterScale]: props?.enterScale ?? "0.95",
+  },
+});
 
-type ZoomOut = (props?: {
-  duration?: string | undefined;
-  exitScale?: string | undefined;
-}) => StyleRule;
-export const zoomOut: ZoomOut = (props) =>
-  deepmerge.all<StyleRule>([
-    exitBase(props?.duration),
-    {
-      vars: {
-        [exitScale]: props?.exitScale ?? "0.95",
-      },
-    },
-  ]);
+type ZoomOut = (
+  props?:
+    | {
+        duration?: string | undefined;
+        exitScale?: string | undefined;
+      }
+    | undefined
+) => StyleRule;
+export const zoomOut: ZoomOut = (props) => ({
+  animationName: exit,
+  animationDuration: props?.duration ?? "0.3s",
+  animationTimingFunction: tokens.transitionTimingFunction.easeInOut,
+  vars: {
+    [exitScale]: props?.exitScale ?? "0.95",
+  },
+});
