@@ -1,4 +1,4 @@
-import { StyleRule } from "@vanilla-extract/css";
+import type { StyleRule } from "@vanilla-extract/css";
 import { enterScale, exitScale } from "../vars.css";
 import { enter } from "../keyframes/enter.css";
 import { tokens } from "../theme.css";

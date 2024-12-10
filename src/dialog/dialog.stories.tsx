@@ -33,6 +33,9 @@ export const Default: Story = {
               <p>content</p>
               <DialogFooter>
                 <Button onPress={close}>OK</Button>
+                <Button onPress={close} variant="outline">
+                  Cancel
+                </Button>
               </DialogFooter>
             </>
           )}

@@ -9,6 +9,7 @@ import { fadeIn, fadeOut } from "../styles/rules/fade.css";
 import { style, StyleRule } from "@vanilla-extract/css";
 import { zoomIn, zoomOut } from "../styles/rules/zoom.css";
 import deepmerge from "deepmerge";
+import { stack } from "../styles/rules/stack.css";
 
 export const dialogOverlay = style({
   position: "fixed",
@@ -100,9 +101,7 @@ export const dialogCloseButtonIcon = style({
 });
 
 export const dialogHeader = style({
-  display: "flex",
-  flexDirection: "column",
-  gap: tokens.spacing["1.5"],
+  ...stack({ gap: tokens.spacing["1.5"] }),
   textAlign: "center",
   "@media": {
     [`(min-width: 40rem)`]: {
@@ -112,10 +111,9 @@ export const dialogHeader = style({
 });
 
 export const dialogFooter = style({
-  display: "flex",
-  flexDirection: "column-reverse",
+  ...stack({ gap: tokens.spacing[2], reverse: true }),
   "@media": {
-    [`(min-width: 40rem)`]: {
+    ["(min-width: 40rem)"]: {
       flexDirection: "row",
       justifyContent: "flex-end",
       gap: tokens.spacing[2],
@@ -129,9 +127,7 @@ export const dialogTitle = style({
 });
 
 export const dialogDescription = style({
-  display: "flex",
-  flexDirection: "column",
-  gap: tokens.spacing["1.5"],
+  ...stack({ gap: tokens.spacing["1.5"] }),
   textAlign: "center",
   "@media": {
     [`(min-width: 40rem)`]: {
