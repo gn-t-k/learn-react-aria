@@ -1,6 +1,7 @@
 import { globalStyle, style } from "@vanilla-extract/css";
 import { tokens } from "../styles/theme.css";
 import { recipe } from "@vanilla-extract/recipes";
+import { center } from "../styles/rules/center.css";
 
 export const wrapper = style({
   width: "fit-content",
@@ -9,7 +10,6 @@ export const wrapper = style({
 export const headingWrapper = style({
   display: "flex",
   width: "100%",
-  alignItems: "center",
   gap: tokens.spacing[1],
   padding: `${tokens.spacing[1]} 0 ${tokens.spacing[4]}`,
 });
@@ -19,8 +19,8 @@ export const headingButtonIcon = style({
 });
 
 export const heading = style({
-  flexGrow: 1,
-  textAlign: "center",
+  flex: 1,
+  ...center(),
   ...tokens.composite.text.sm,
   fontWeight: tokens.fontWeight.medium,
   backgroundColor: tokens.color.background,
@@ -50,15 +50,15 @@ export const cell = recipe({
     border: 0,
     color: tokens.color.foreground,
     backgroundColor: tokens.color.background,
-    display: "inline-flex",
-    justifyContent: "center",
+    ...center({
+      vertical: false,
+    }),
     whiteSpace: "nowrap",
     borderRadius: tokens.borderRadius.md,
     ...tokens.composite.text.sm,
     fontWeight: tokens.fontWeight.medium,
     transition: "color 0.2s, background-color 0.2s",
     position: "relative",
-    padding: `0 ${tokens.spacing[3]}`,
     ...tokens.composite.size[9],
     selectors: {
       "&:disabled": {

@@ -10,6 +10,7 @@ import { style, StyleRule } from "@vanilla-extract/css";
 import { zoomIn, zoomOut } from "../styles/rules/zoom.css";
 import deepmerge from "deepmerge";
 import { stack } from "../styles/rules/stack.css";
+import { center } from "../styles/rules/center.css";
 
 export const dialogOverlay = style({
   position: "fixed",
@@ -101,8 +102,8 @@ export const dialogCloseButtonIcon = style({
 });
 
 export const dialogHeader = style({
-  ...stack({ gap: tokens.spacing["1.5"] }),
-  textAlign: "center",
+  ...stack({ spaces: tokens.spacing["1.5"] }),
+  ...center(),
   "@media": {
     [`(min-width: 40rem)`]: {
       textAlign: "left",
@@ -111,7 +112,7 @@ export const dialogHeader = style({
 });
 
 export const dialogFooter = style({
-  ...stack({ gap: tokens.spacing[2], reverse: true }),
+  ...stack({ spaces: tokens.spacing[2], reverse: true }),
   "@media": {
     ["(min-width: 40rem)"]: {
       flexDirection: "row",
@@ -127,8 +128,8 @@ export const dialogTitle = style({
 });
 
 export const dialogDescription = style({
-  ...stack({ gap: tokens.spacing["1.5"] }),
-  textAlign: "center",
+  ...stack({ spaces: tokens.spacing["1.5"] }),
+  ...center(),
   "@media": {
     [`(min-width: 40rem)`]: {
       textAlign: "left",

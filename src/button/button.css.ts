@@ -1,14 +1,13 @@
 import { recipe, RecipeVariants } from "@vanilla-extract/recipes";
 import { tokens } from "../styles/theme.css";
+import { center } from "../styles/rules/center.css";
 
 export const button = recipe({
   base: {
     border: 0,
     color: tokens.color.foreground,
     backgroundColor: tokens.color.background,
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
+    ...center(),
     whiteSpace: "nowrap",
     borderRadius: tokens.borderRadius.sm,
     ...tokens.composite.text.sm,

@@ -150,6 +150,7 @@ const baseTokens = {
     "5xl": "64rem",
     "6xl": "72rem",
     "7xl": "80rem",
+    full: "100%",
   },
   width: {
     1: "0.25rem",
