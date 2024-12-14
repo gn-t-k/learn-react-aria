@@ -2,15 +2,14 @@ import { globalStyle, style } from "@vanilla-extract/css";
 import { tokens } from "../styles/theme.css";
 import { recipe } from "@vanilla-extract/recipes";
 import { center } from "../styles/rules/center.css";
+import { cluster } from "../styles/rules/cluster.css";
 
 export const wrapper = style({
   width: "fit-content",
 });
 
 export const headingWrapper = style({
-  display: "flex",
-  width: "100%",
-  gap: tokens.spacing[1],
+  ...cluster({ spaces: tokens.spacing[1] }),
   padding: `${tokens.spacing[1]} 0 ${tokens.spacing[4]}`,
 });
 
@@ -50,9 +49,7 @@ export const cell = recipe({
     border: 0,
     color: tokens.color.foreground,
     backgroundColor: tokens.color.background,
-    ...center({
-      vertical: false,
-    }),
+    ...center({ vertical: false }),
     whiteSpace: "nowrap",
     borderRadius: tokens.borderRadius.md,
     ...tokens.composite.text.sm,

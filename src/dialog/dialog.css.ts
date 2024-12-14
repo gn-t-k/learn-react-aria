@@ -11,6 +11,7 @@ import { zoomIn, zoomOut } from "../styles/rules/zoom.css";
 import deepmerge from "deepmerge";
 import { stack } from "../styles/rules/stack.css";
 import { center } from "../styles/rules/center.css";
+import { cluster } from "../styles/rules/cluster.css";
 
 export const dialogOverlay = style({
   position: "fixed",
@@ -106,7 +107,7 @@ export const dialogHeader = style({
   ...center(),
   "@media": {
     [`(min-width: 40rem)`]: {
-      textAlign: "left",
+      alignItems: "flex-start",
     },
   },
 });
@@ -115,9 +116,10 @@ export const dialogFooter = style({
   ...stack({ spaces: tokens.spacing[2], reverse: true }),
   "@media": {
     ["(min-width: 40rem)"]: {
-      flexDirection: "row",
-      justifyContent: "flex-end",
-      gap: tokens.spacing[2],
+      ...cluster({
+        spaces: tokens.spacing[2],
+        justifyContent: "flex-end",
+      }),
     },
   },
 });
@@ -132,7 +134,7 @@ export const dialogDescription = style({
   ...center(),
   "@media": {
     [`(min-width: 40rem)`]: {
-      textAlign: "left",
+      alignItems: "flex-start",
     },
   },
 });

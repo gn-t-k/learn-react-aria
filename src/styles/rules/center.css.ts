@@ -5,9 +5,9 @@ import { ValueOf } from "../../utils/value-of";
 type Center = (
   props?:
     | {
-        maxWidth?: ValueOf<typeof tokens.maxWidth>;
-        gutters?: ValueOf<typeof tokens.spacing>;
-        vertical?: boolean;
+        maxWidth?: ValueOf<typeof tokens.maxWidth> | undefined;
+        gutters?: ValueOf<typeof tokens.spacing> | undefined;
+        vertical?: boolean | undefined;
       }
     | undefined
 ) => StyleRule;

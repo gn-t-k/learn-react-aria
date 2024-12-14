@@ -5,8 +5,8 @@ import { ValueOf } from "../../utils/value-of";
 type Stack = (
   props?:
     | {
-        spaces?: ValueOf<typeof tokens.spacing>;
-        reverse?: boolean;
+        spaces?: ValueOf<typeof tokens.spacing> | undefined;
+        reverse?: boolean | undefined;
       }
     | undefined
 ) => StyleRule;

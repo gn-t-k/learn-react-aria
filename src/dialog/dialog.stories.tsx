@@ -32,10 +32,10 @@ export const Default: Story = {
               </DialogHeader>
               <p>content</p>
               <DialogFooter>
-                <Button onPress={close}>OK</Button>
                 <Button onPress={close} variant="outline">
                   Cancel
                 </Button>
+                <Button onPress={close}>OK</Button>
               </DialogFooter>
             </>
           )}
