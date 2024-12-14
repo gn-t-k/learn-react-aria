@@ -42,7 +42,7 @@ export const dialogContentModal = style({
   left: "50vw",
   top: "50vh",
   zIndex: 50,
-  width: "100%",
+  width: tokens.width.full,
   maxWidth: tokens.maxWidth.lg,
   transform: "translate(-50%, -50%)",
   border: `1px solid ${tokens.color.border}`,
@@ -56,7 +56,7 @@ export const dialogContentModal = style({
       borderRadius: tokens.borderRadius.lg,
     },
     [`(min-width: 48rem)`]: {
-      width: "100%",
+      width: tokens.width.full,
     },
   },
   selectors: {

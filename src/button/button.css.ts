@@ -2,6 +2,7 @@ import { recipe, RecipeVariants } from "@vanilla-extract/recipes";
 import { tokens } from "../styles/theme.css";
 import { center } from "../styles/rules/center.css";
 import { text } from "../styles/rules/text.css";
+import { square } from "../styles/rules/square.css";
 
 export const button = recipe({
   base: {
@@ -97,8 +98,7 @@ export const button = recipe({
         padding: `0 ${tokens.spacing[8]}`,
       },
       icon: {
-        height: "2.5rem",
-        width: "2.5rem",
+        ...square({ size: "10" }),
       },
     },
   },
