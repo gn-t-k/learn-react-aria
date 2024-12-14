@@ -1,6 +1,7 @@
 import { recipe, RecipeVariants } from "@vanilla-extract/recipes";
 import { tokens } from "../styles/theme.css";
 import { center } from "../styles/rules/center.css";
+import { text } from "../styles/rules/text.css";
 
 export const button = recipe({
   base: {
@@ -10,7 +11,7 @@ export const button = recipe({
     ...center(),
     whiteSpace: "nowrap",
     borderRadius: tokens.borderRadius.sm,
-    ...tokens.composite.text.sm,
+    ...text({ size: "sm" }),
     fontWeight: tokens.fontWeight.medium,
     transition: "color 0.2s, background-color 0.2s",
     position: "relative",

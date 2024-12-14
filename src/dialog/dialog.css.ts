@@ -12,6 +12,8 @@ import deepmerge from "deepmerge";
 import { stack } from "../styles/rules/stack.css";
 import { center } from "../styles/rules/center.css";
 import { cluster } from "../styles/rules/cluster.css";
+import { text } from "../styles/rules/text.css";
+import { square } from "../styles/rules/square.css";
 
 export const dialogOverlay = style({
   position: "fixed",
@@ -99,7 +101,7 @@ export const dialogCloseButton = style({
 });
 
 export const dialogCloseButtonIcon = style({
-  ...tokens.composite.size[4],
+  ...square({ size: "4" }),
 });
 
 export const dialogHeader = style({
@@ -125,7 +127,7 @@ export const dialogFooter = style({
 });
 
 export const dialogTitle = style({
-  ...tokens.composite.text.lg,
+  ...text({ size: "lg" }),
   fontWeight: tokens.fontWeight.semibold,
 });
 

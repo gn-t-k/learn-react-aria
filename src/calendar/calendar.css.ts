@@ -3,6 +3,8 @@ import { tokens } from "../styles/theme.css";
 import { recipe } from "@vanilla-extract/recipes";
 import { center } from "../styles/rules/center.css";
 import { cluster } from "../styles/rules/cluster.css";
+import { text } from "../styles/rules/text.css";
+import { square } from "../styles/rules/square.css";
 
 export const wrapper = style({
   width: "fit-content",
@@ -14,13 +16,13 @@ export const headingWrapper = style({
 });
 
 export const headingButtonIcon = style({
-  ...tokens.composite.size[4],
+  ...square({ size: "4" }),
 });
 
 export const heading = style({
   flex: 1,
   ...center(),
-  ...tokens.composite.text.sm,
+  ...text({ size: "sm" }),
   fontWeight: tokens.fontWeight.medium,
   backgroundColor: tokens.color.background,
   color: tokens.color.foreground,
@@ -34,7 +36,7 @@ export const grid = style({
 export const gridHeaderCell = style({
   width: tokens.width[8],
   borderRadius: tokens.borderRadius.md,
-  ...tokens.composite.text.sm,
+  ...text({ size: "sm" }),
   fontWeight: tokens.fontWeight.normal,
   color: tokens.color.mutedForeground,
 });
@@ -52,11 +54,11 @@ export const cell = recipe({
     ...center({ vertical: false }),
     whiteSpace: "nowrap",
     borderRadius: tokens.borderRadius.md,
-    ...tokens.composite.text.sm,
+    ...text({ size: "sm" }),
     fontWeight: tokens.fontWeight.medium,
     transition: "color 0.2s, background-color 0.2s",
     position: "relative",
-    ...tokens.composite.size[9],
+    ...square({ size: "9" }),
     selectors: {
       "&:disabled": {
         pointerEvents: "none",
@@ -105,7 +107,7 @@ export const cell = recipe({
             left: "50%",
             transform: "translate(-50%, -50%)",
             top: "75%",
-            ...tokens.composite.size[2],
+            ...square({ size: "2" }),
             borderRadius: tokens.borderRadius.full,
             backgroundColor: tokens.color.primary,
             color: tokens.color.primaryForeground,
