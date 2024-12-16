@@ -1,9 +1,10 @@
 import type { StyleRule } from "@vanilla-extract/css";
 
-type Text = (props: {
+type Props = {
   size: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl";
-}) => StyleRule;
-export const text: Text = (props) => {
+};
+
+export const text = (props: Props) => {
   return {
     xs: {
       fontSize: "0.75rem",
@@ -57,5 +58,5 @@ export const text: Text = (props) => {
       fontSize: "8rem",
       lineHeight: "1",
     },
-  }[props.size];
+  }[props.size] satisfies StyleRule;
 };

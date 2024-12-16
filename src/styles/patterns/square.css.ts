@@ -1,10 +1,10 @@
 import { StyleRule } from "@vanilla-extract/css";
 
-type Square = (props: {
+type Props = {
   size: "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10";
-}) => StyleRule;
+};
 
-export const square: Square = (props) =>
+export const square = (props: Props) =>
   ({
     1: {
       width: "0.25rem",
@@ -46,4 +46,4 @@ export const square: Square = (props) =>
       width: "2.5rem",
       height: "2.5rem",
     },
-  }[props.size]);
+  }[props.size] satisfies StyleRule);
