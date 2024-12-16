@@ -4,10 +4,10 @@ import {
   enterTranslateY,
   exitTranslateX,
   exitTranslateY,
-} from "../vars.css";
-import { enter } from "../keyframes/enter.css";
-import { tokens } from "../theme.css";
-import { exit } from "../keyframes/exit.css";
+} from "../../vars.css";
+import { enter } from "../../keyframes/enter.css";
+import { tokens } from "../../theme.css";
+import { exit } from "../../keyframes/exit.css";
 
 type SlideInFromTopProps =
   | {

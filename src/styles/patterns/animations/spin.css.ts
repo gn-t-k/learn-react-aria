@@ -1,5 +1,5 @@
 import { StyleRule } from "@vanilla-extract/css";
-import { spin as spinKeyframe } from "../keyframes/spin.css";
+import { spin as spinKeyframe } from "../../keyframes/spin.css";
 
 type Props =
   | {

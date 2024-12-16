@@ -4,16 +4,16 @@ import {
   slideInFromTop,
   slideOutToLeft,
   slideOutToTop,
-} from "../styles/patterns/slide.css";
-import { fadeIn, fadeOut } from "../styles/patterns/fade.css";
+} from "../styles/patterns/animations/slide.css";
+import { fadeIn, fadeOut } from "../styles/patterns/animations/fade.css";
 import { style, StyleRule } from "@vanilla-extract/css";
-import { zoomIn, zoomOut } from "../styles/patterns/zoom.css";
+import { zoomIn, zoomOut } from "../styles/patterns/animations/zoom.css";
 import deepmerge from "deepmerge";
-import { stack } from "../styles/patterns/stack.css";
-import { center } from "../styles/patterns/center.css";
-import { cluster } from "../styles/patterns/cluster.css";
-import { text } from "../styles/patterns/text.css";
-import { square } from "../styles/patterns/square.css";
+import { stack } from "../styles/patterns/layouts/stack.css";
+import { center } from "../styles/patterns/layouts/center.css";
+import { cluster } from "../styles/patterns/layouts/cluster.css";
+import { text } from "../styles/patterns/components/text.css";
+import { square } from "../styles/patterns/components/square.css";
 
 export const dialogOverlay = style({
   position: "fixed",

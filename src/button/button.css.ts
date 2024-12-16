@@ -1,8 +1,8 @@
 import { recipe, RecipeVariants } from "@vanilla-extract/recipes";
 import { tokens } from "../styles/theme.css";
-import { center } from "../styles/patterns/center.css";
-import { text } from "../styles/patterns/text.css";
-import { square } from "../styles/patterns/square.css";
+import { center } from "../styles/patterns/layouts/center.css";
+import { text } from "../styles/patterns/components/text.css";
+import { square } from "../styles/patterns/components/square.css";
 
 export const button = recipe({
   base: {

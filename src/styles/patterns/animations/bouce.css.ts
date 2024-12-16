@@ -1,5 +1,5 @@
 import { StyleRule } from "@vanilla-extract/css";
-import { bounce as bounceKeyframe } from "../keyframes/bounce.css";
+import { bounce as bounceKeyframe } from "../../keyframes/bounce.css";
 
 type Props =
   | {

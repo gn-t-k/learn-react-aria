@@ -1,5 +1,5 @@
 import { StyleRule } from "@vanilla-extract/css";
-import { pulse as pulseKeyframe } from "../keyframes/pulse.css";
+import { pulse as pulseKeyframe } from "../../keyframes/pulse.css";
 
 type Props =
   | {

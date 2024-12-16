@@ -1,10 +1,10 @@
 import { globalStyle, style } from "@vanilla-extract/css";
 import { tokens } from "../styles/theme.css";
 import { recipe } from "@vanilla-extract/recipes";
-import { center } from "../styles/patterns/center.css";
-import { cluster } from "../styles/patterns/cluster.css";
-import { text } from "../styles/patterns/text.css";
-import { square } from "../styles/patterns/square.css";
+import { center } from "../styles/patterns/layouts/center.css";
+import { cluster } from "../styles/patterns/layouts/cluster.css";
+import { text } from "../styles/patterns/components/text.css";
+import { square } from "../styles/patterns/components/square.css";
 
 export const wrapper = style({
   width: "fit-content",

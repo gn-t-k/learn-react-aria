@@ -1,6 +1,6 @@
 import { StyleRule } from "@vanilla-extract/css";
-import { ValueOf } from "../../utils/value-of";
-import { tokens } from "../theme.css";
+import { ValueOf } from "../../../utils/value-of";
+import { tokens } from "../../theme.css";
 
 type Props =
   | {

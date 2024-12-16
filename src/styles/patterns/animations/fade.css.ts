@@ -1,39 +1,39 @@
 import type { StyleRule } from "@vanilla-extract/css";
-import { enterScale, exitScale } from "../vars.css";
-import { enter } from "../keyframes/enter.css";
-import { tokens } from "../theme.css";
-import { exit } from "../keyframes/exit.css";
+import { enterOpacity, exitOpacity } from "../../vars.css";
+import { enter } from "../../keyframes/enter.css";
+import { tokens } from "../../theme.css";
+import { exit } from "../../keyframes/exit.css";
 
-type ZoomInProps =
+type FadeInProps =
   | {
       duration?: string | undefined;
-      enterScale?: string | undefined;
+      enterOpacity?: string | undefined;
     }
   | undefined;
 
-export const zoomIn = (props?: ZoomInProps) =>
+export const fadeIn = (props?: FadeInProps) =>
   ({
     animationName: enter,
     animationDuration: props?.duration ?? "0.2s",
     animationTimingFunction: tokens.transitionTimingFunction.easeInOut,
     vars: {
-      [enterScale]: props?.enterScale ?? "0.95",
+      [enterOpacity]: props?.enterOpacity ?? "0%",
     },
   } satisfies StyleRule);
 
-type ZoomOutProps =
+type FadeOutProps =
   | {
       duration?: string | undefined;
-      exitScale?: string | undefined;
+      exitOpacity?: string | undefined;
     }
   | undefined;
 
-export const zoomOut = (props?: ZoomOutProps) =>
+export const fadeOut = (props?: FadeOutProps) =>
   ({
     animationName: exit,
     animationDuration: props?.duration ?? "0.3s",
     animationTimingFunction: tokens.transitionTimingFunction.easeInOut,
     vars: {
-      [exitScale]: props?.exitScale ?? "0.95",
+      [exitOpacity]: props?.exitOpacity ?? "0%",
     },
   } satisfies StyleRule);

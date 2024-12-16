@@ -1,5 +1,5 @@
 import type { StyleRule } from "@vanilla-extract/css";
-import { ping as pingKeyframe } from "../keyframes/ping.css";
+import { ping as pingKeyframe } from "../../keyframes/ping.css";
 
 type Props =
   | {
