@@ -1,26 +1,7 @@
-import { style } from "@vanilla-extract/css";
+import { StyleRule } from "@vanilla-extract/css";
 import { ValueOf } from "../../../utils/value-of";
 import { tokens } from "../../theme.css";
 
-// .with-sidebar {
-//   display: flex;
-//   flex-wrap: wrap;
-//   gap: var(--gutter, var(--s1))
-// }
-
-// .with-sidebar > :first-child {
-//   /* サイドバーがサイドバーたりうる値 */
-//   flex-basis: 20rem;
-//   flex-grow: 1
-// }
-
-// .with-sidebar > :last-child {
-//   /* 0から伸長する */
-//   flex-basis: 0;
-//   flex-grow: 999;
-//   /* 要素の幅が等しくなった場合に折り返す */
-//   min-width: 50%;
-// }
 type Props =
   | {
       side?: "left" | "right" | undefined;
@@ -29,3 +10,20 @@ type Props =
       gutter?: ValueOf<typeof tokens.spacing> | undefined;
     }
   | undefined;
+export const withSidebar = (props: Props) =>
+  ({
+    display: "flex",
+    flexWrap: "wrap",
+    gap: props?.gutter ?? tokens.spacing["2"],
+    selectors: {
+      "& > :first-child": {
+        flexBasis: props?.sideWidth ?? tokens.width["20"],
+        flexGrow: 1,
+      },
+      "& > :last-child": {
+        flexBasis: 0,
+        flexGrow: 999,
+        minWidth: props?.contentMinWidth ?? "50%",
+      },
+    },
+  } satisfies StyleRule);
