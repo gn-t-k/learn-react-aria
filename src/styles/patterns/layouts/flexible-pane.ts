@@ -17,7 +17,7 @@ export const flexiblePane = (props?: Props) => {
       gap: props?.gutter ?? tokens.spacing["2"],
     },
     fixed: {
-      flexBasis: props?.fixedWidth ?? tokens.width["20"],
+      flexBasis: props?.fixedWidth ?? tokens.width["80"],
       flexGrow: 1,
     },
     flexible: {
